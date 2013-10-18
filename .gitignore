@@ -1,3 +1,8 @@
+# VIM temporary files
+*~
+*.swp
+
+# Django
 *.log
 *.pot
 *.pyc
