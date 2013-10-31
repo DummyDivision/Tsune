@@ -2,8 +2,16 @@
 *~
 *.swp
 
-# Django
+# PyCharms project files
+.idea/
+
+# Vagrant files
+.vagrant/
+
+# Python files
 *.log
 *.pot
 *.pyc
+
+# Django files
 local_settings.py
