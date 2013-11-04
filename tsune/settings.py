@@ -1,3 +1,5 @@
+import os # for environment variables, paths, etc
+
 # Django settings for tsune project.
 
 DEBUG = True
@@ -83,7 +85,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'nc1a0c1x5kfonnd0=4*n$fyu)wltb3k-nz=o7z!pxawvg4!xqk'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -158,7 +160,6 @@ LOGGING = {
 }
 
 # Settings for Heroku Deployment
-import os
 
 if os.environ.get("DATABASE_URL") != None:
     # Parse database configuration from $DATABASE_URL
