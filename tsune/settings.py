@@ -4,6 +4,7 @@ import os # for environment variables, paths, etc
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))  # Gets absolute project path for file creation et al
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
