@@ -161,7 +161,7 @@ LOGGING = {
 
 # Settings for Heroku Deployment
 
-if os.environ.get("DATABASE_URL") != None:
+if os.environ.get("DATABASE_URL") is not None:
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
     DATABASES['default'] =  dj_database_url.config()
