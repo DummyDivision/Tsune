@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>{% block title %}Tsune{% endblock %}</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/main.css">-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </head>
+  
+  <body>
+  <div class="container">
+    <nav class="navbar" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Suche">
+            </div>
+            <button type="submit" class="btn btn-default">Suchen</button>
+          </form>
+        </li>
+        <li>
+          <a href="#" id="settingsPop">Einstellungen</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Aktionen<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" onclick="clickHandler.profileClick();">My profile</a>
+            </li>
+            <li>
+              <a href="#">My friends</a>
+            </li>
+            <li>
+              <a href="#">My community</a>
+            </li>
+            <li>
+              <a href="#">Local Challenge</a>
+            </li>
+            <li>
+              <a href="#">Import</a>
+            </li>
+            <li>
+              <a href="#">Trade</a>
+            </li>
+            <li>
+              <a href="#">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+
