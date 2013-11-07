@@ -86,7 +86,24 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ.get("SECRET_KEY")
+if os.environ.get("SECRET_KEY") is None:
+    secret_file = os.path.join(PROJECT_ROOT, 'local_settings.py')
+    try:
+        open(secret_file).read().strip()
+    except IOError:
+        try:
+            import random
+            SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+            secret_temp = "SECRET_KEY = '" + SECRET_KEY + "'"
+            secret = file(secret_file, 'w')
+            secret.write(secret_temp)
+            secret.close()
+        except IOError:
+            Exception('Please create a %s file with random characters \
+            to generate your secret key!' % secret_file)
+else:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -181,3 +198,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# Include local_settings.py
+try:
+    from local_settings import *
+except ImportError:
+    pass
