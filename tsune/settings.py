@@ -15,9 +15,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'vagrant',
-        'USER': 'vagrant',
-        'PASSWORD': 'vagrant',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Pa$$w0rd',
         'HOST': '',
         'PORT': '',
     }
