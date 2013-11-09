@@ -1,0 +1,32 @@
+{% extends "cardbox/base.html" %}
+
+{% block title %}Tsune - Karte {{ action }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <form method="post">{% csrf_token %}
+                    <h1>Karte {{ action }}</h1>
+
+                    <div class="form-group">
+                        <label class="form-label">Vorderseite</label></br>
+                        {{ form.front }}
+                        <label class="form-label">R&uuml;ckseite</label>
+
+                        <div class="controls"></div>
+                        {{ form.back }}
+                        <a href="#">Weitere Einstellungen...</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="submit" value="{{ button_text }}" class="btn btn-primary"/>
+                        </div>
+                        <div class="col-md-4" style="text-align:center">
+                            <a class="btn btn-primary">Vorschau</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

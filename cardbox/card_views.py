@@ -10,6 +10,24 @@ from cardbox.card_forms import CardForm
 
 from cardbox.card_model import Card
 
+
+class CardCreate(CreateView):
+    model = Card
+    form_class = CardForm
+    def get_context_data(self, **kwargs):
+        context = super(CardCreate, self).get_context_data(**kwargs)
+        context['action'] = "erstellen"
+        context['button_text'] = "Erstellen"
+        return context
+
+class CardUpdate(UpdateView):
+    model = Card
+    form_class = CardForm
+    def get_context_data(self, **kwargs):
+        context = super(CardUpdate, self).get_context_data(**kwargs)
+        context['action'] = "bearbeiten"
+        context['button_text'] = "Änderungen Übernehmen"
+        return context
 class CardDelete(DeleteView):
     model = Card
     def get(self, request, *args, **kwargs):
