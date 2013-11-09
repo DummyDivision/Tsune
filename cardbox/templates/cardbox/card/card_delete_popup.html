@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "cardbox/js/show_delete_popup.js" %}"></script>
+<div id="card_delete_popup"
+     style="position:absolute; top:50%; margin-top:-125px; left:50%; margin-left:-300px;z-index:3; display:none; ">
+
+    <div class="jumbotron" style="width:600px; height:250px; border:3px solid black;">
+        <h1>Karte l&ouml;schen? </h1>
+
+        <div class="row" style="text-align:center">
+
+
+            <div class="col-md-4">
+                <form id="card_delete_popup_form" method="POST" action="#">
+                    {% csrf_token %}
+                    <button type="submit" value="DELETE" class="btn btn-primary"><h3>Löschen</h3>
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a class="btn btn-primary" onclick="hide_delete_popup()"><h3>Abbrechen</h3></a>
+            </div>
+        </div>
+    </div>
+</div>
