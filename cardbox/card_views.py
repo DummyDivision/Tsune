@@ -20,6 +20,9 @@ class CardCreate(CreateView):
         context['button_text'] = "Erstellen"
         return context
 
+class CardDetailView(DetailView):
+    model = Card
+
 class CardUpdate(UpdateView):
     model = Card
     form_class = CardForm

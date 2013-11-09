@@ -1,0 +1,22 @@
+{% extends "cardbox/base.html" %}
+{% block title %}Tsune - Neues Karte{% endblock %}
+{% block content %}
+    {% include "cardbox/card/card_delete_popup.html" %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron learning">
+                <div class="container">
+                    <h1 id="question">{{ object.front }}</h1>
+
+                    <p id="answer" style="height: 240px;">{{ object.back }}</p>
+
+                    <div class="row">
+                        <a class="btn btn-primary btn-lg col-md-2"
+                           onclick="show_delete_popup('{% url 'card:card_delete' object.ID %}')"
+                           style="text-align:center">L&ouml;schen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
