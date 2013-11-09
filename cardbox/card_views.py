@@ -11,28 +11,42 @@ from cardbox.card_forms import CardForm
 from cardbox.card_model import Card
 
 
+class CardList(ListView):
+    model = Card
+
+
 class CardCreate(CreateView):
     model = Card
     form_class = CardForm
+    success_url = reverse_lazy('card:card_list')
+
     def get_context_data(self, **kwargs):
         context = super(CardCreate, self).get_context_data(**kwargs)
         context['action'] = "erstellen"
         context['button_text'] = "Erstellen"
         return context
 
+
 class CardDetailView(DetailView):
     model = Card
+
 
 class CardUpdate(UpdateView):
     model = Card
     form_class = CardForm
+    success_url = reverse_lazy('card:card_list')
+
     def get_context_data(self, **kwargs):
         context = super(CardUpdate, self).get_context_data(**kwargs)
         context['action'] = "bearbeiten"
         context['button_text'] = "Änderungen Übernehmen"
         return context
+
+
 class CardDelete(DeleteView):
     model = Card
+    success_url = reverse_lazy('card:card_list')
+
     def get(self, request, *args, **kwargs):
         """Never get the confirm_delete template!"""
         print "test"
@@ -41,4 +55,6 @@ class CardDelete(DeleteView):
     def post(self, *args, **kwargs):
         #TODO: user authentification
         return super(CardDelete, self).post(self, args, kwargs)
+
+
 

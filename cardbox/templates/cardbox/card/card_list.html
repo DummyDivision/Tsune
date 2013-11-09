@@ -1,0 +1,61 @@
+{% extends "cardbox/base.html" %}
+{% block title %}Tsune - Kartenliste{% endblock %}
+{% block content %}
+    {% include "cardbox/card/card_delete_popup.html" %}
+    <div class="row">
+        {% if object_list %}
+            {% for card in object_list %}
+
+                <div class="col-md-3">
+                    <div class="panel card-overview panel-default" style="position:relative">
+                        <a href="{% url 'card:card_detail' card.ID %}"><span
+                                class="clickWholeDiv"></span></a>
+
+                        <div class="panel-heading">
+                            <b>{{ card.front }}</b>
+
+                        </div>
+                        <div class="panel-body">{{ card.back }}</div>
+                        <div class="panel-footer">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-12">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default"
+                                           onclick="show_delete_popup('{% url 'card:card_delete' card.ID %}')"
+                                           class="btn btn-primary" style="z-index:2">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                        <a href="{% url 'card:card_edit' card.ID %}"
+                                           class="btn btn-default" style="z-index:2">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if forloop.last %}
+                    {% if forloop.counter|divisibleby:"4" %}
+                        </div>
+                        <div class="row">
+                            {% include "cardbox/card/card_newcarddiv.html" %}
+                        </div>
+                    {% else %}
+                        {% include "cardbox/card/card_newcarddiv.html" %}
+                    {% endif %}
+                {% else %}
+                    {% if forloop.counter|divisibleby:"4" %}
+                        </div>
+                        <div class="row">
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="row">
+                {% include "cardbox/card/card_newcarddiv.html" %}
+            </div>
+        {% endif %}
+        </div>
+{% endblock %}
