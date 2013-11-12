@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^tsune/', include('tsune.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('djan
+    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:go.contrib.admindocs.urls')),
 
     #url(r'^admin/', include(admin.site.urls)),
