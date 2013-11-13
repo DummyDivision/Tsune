@@ -140,11 +140,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cardbox',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'authentication',
+    'cardbox',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -199,6 +199,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# Settings for user authentication.
+LOGIN_URL = '/user/login/'
+LOGOUT_URL = '/user/logout/'
+LOGIN_REDIRECT_URL = '/cardbox/'
 
 # Include local_settings.py
 try:
