@@ -9,8 +9,11 @@
                 <div class="col-md-3">
                     <div class="thumbnail  cardstack" style="padding: 0">
                         <div class="caption">
-                            <h2 class="wordwrap"><a href="{% url 'deck:deck_detail' deck.ID %}">{{ deck.title  }}</a></h2>
+                            <h2 class="wordwrap"><a href="{% url 'deck:deck_detail' deck.ID %}">{{ deck.title }}</a>
+                            </h2>
+
                             <p class="wordwrap">{{ deck.description }}</p>
+
                             <div class="row" style="text-align:center">
                                 <div class="col-md-12">
                                     <a class="btn btn-primary" style="z-index: 2"
@@ -46,6 +49,7 @@
                                 </div>
                             </div>
                             <p></p>
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <b>BY:</b>
@@ -55,6 +59,7 @@
                                 </div>
                             </div>
                             <p></p>
+
                             <div class="row" style="text-align: center;">
                                 <div class="col-md-12">
                                     <div class="btn-group">
@@ -90,6 +95,10 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
+        {% else %}
+            <div class="row">
+                {% include "cardbox/deck/deck_newdeckdiv.html" %}
+            </div>
         {% endif %}
-    </div>
+        </div>
 {% endblock %}
