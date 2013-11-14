@@ -1,4 +1,3 @@
-# TODO: Connection with deck
 from django.db import models
 from django.core.urlresolvers import reverse
 from cardbox.deck_model import Deck
