@@ -73,15 +73,23 @@
                         </div>
                     </div>
                 </div>
+
+                {% if forloop.last %}
+                    {% if forloop.counter|divisibleby:"4" %}
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            {% include "cardbox/deck/deck_newdeckdiv.html" %}
+                        </div>
+                    {% else %}
+                        {% include "cardbox/deck/deck_newdeckdiv.html" %}
+                    {% endif %}
+                {% else %}
+                    {% if forloop.counter|divisibleby:"4" %}
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                    {% endif %}
+                {% endif %}
             {% endfor %}
         {% endif %}
-        <div class="col-md-4">
-            <div class="thumbnail  cardstack" style="padding: 0; height:415px; background-color: grey; opacity: 0.5; cursor: pointer;">
-                <div style="position:absolute; top:97px; left:105px;">
-                    <a href="{% url "deck:deck_new" %}"><span class="clickWholeDiv"></span></a>
-                    <h1 style="font-size:160pt;">+</h1>
-                </div>
-            </div>
-        </div>
     </div>
 {% endblock %}
