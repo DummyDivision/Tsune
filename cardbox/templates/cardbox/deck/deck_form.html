@@ -1,0 +1,32 @@
+{% extends "cardbox/base.html" %}
+
+{% block title %}Tsune - Deck {{ action }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <form method="post">{% csrf_token %}
+                    <h1>Deck {{ action }}</h1>
+                    <div class="form-group">
+                        <label class="form-label">Titel</label>
+                        {{ form.title }}
+                        <label class="form-label">Beschreibung</label>
+                        {{ form.description }}
+                        <a href="#">Weitere Einstellungen...</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="submit" value="{{ button_text }}" class="btn btn-primary"/>
+                        </div>
+                        <div class="col-md-4" style="text-align:center">
+                            <a class="btn btn-primary">Vorschau</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn pull-right btn-primary" href="{% url "deck:deck_list" %}">Abbrechen</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

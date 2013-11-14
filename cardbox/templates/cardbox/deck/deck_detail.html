@@ -1,0 +1,82 @@
+{% extends "cardbox/base.html" %}
+{% block title %}Tsune - {{ deck.title }}{% endblock %}
+{% block content %}
+    {% include "cardbox/card/card_delete_popup.html" %}
+    <div class="row cardstacks" style="margin-top:-15px;">
+        <div class="col-md-offset-4 col-md-4">
+            <div class="thumbnail  cardstack" style="padding: 0">
+                <div class="caption">
+                    <h2>{{ deck.title }}</h2>
+                    <p>{{ deck.description }}</p>
+                    <div class="row" style="text-align:center">
+                        <div class="col-md-12">
+                            <a class="btn btn-primary" style="z-index: 2"
+                               href="#">Lernen</a>
+                            <a class="btn btn-primary" style="z-index: 2"
+                               href="{% url 'card:card_list' deck.ID %}">Karten anzeigen</a>
+                        </div>
+                    </div>
+                    </ul>
+                </div>
+                <div class="modal-footer" style="text-align: left">
+                    <div class="progress">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 100%">
+                                <span class="sr-only">35% Complete (success)</span>
+                            </div>
+                            <div class="progress-bar progress-bar-warning" style="width: 0%">
+                                <span class="sr-only">20% Complete (warning)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>PRIVATE</b><br>
+                            <small>SHARED</small>
+                        </div>
+                        <div class="col-md-4">
+                            <b>0</b><br>
+                            <small>DUE</small>
+                        </div>
+                        <div class="col-md-4">
+                            <b>0</b><br>
+                            <small>TOTAL</small>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>BY:</b>
+                        </div>
+                        <div class="col-md-8">
+                            <small><a>YOURSELF</a></small>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="row" style="text-align: center;">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="btn-group">
+                                    <a class="btn btn-default"
+                                       onclick="show_delete_popup('{% url 'deck:deck_delete' deck.ID %}')"
+                                       class="btn btn-primary" style="z-index:2">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                    <a href="{% url 'deck:deck_edit' deck.ID %}"
+                                       class="btn btn-default" style="z-index:2">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron" style="height:50px; padding:1px; margin-top:20px; text-align: center">
+        <a href="{% url 'deck:deck_list' %}"
+           class="btn btn-primary" style="z-index: 2">Zur&uuml;ck</a>
+    </div>
+
+{% endblock %}
