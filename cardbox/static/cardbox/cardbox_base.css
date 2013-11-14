@@ -30,3 +30,7 @@ span.clickWholeDiv {
 .card-overview:hover {
     border: 3px solid #d0d0d0;
 }
+
+.wordwrap{
+    word-wrap: break-word;
+}
