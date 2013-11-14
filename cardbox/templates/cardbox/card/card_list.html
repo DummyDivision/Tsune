@@ -20,9 +20,9 @@
                             <div class="row" style="text-align: center;">
                                 <div class="col-md-12">
                                     <div class="btn-group">
-                                        <a class="btn btn-default"
+                                        <a
                                            onclick="show_delete_popup('{% url 'card:card_delete' card.ID %}')"
-                                           class="btn btn-primary" style="z-index:2">
+                                           class="btn btn-default" style="z-index:2">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                         <a href="{% url 'card:card_edit' card.ID %}"
