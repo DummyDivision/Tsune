@@ -21,6 +21,7 @@ class CardList(ListView):
     def get_context_data(self, **kwargs):
         context = super(CardList, self).get_context_data(**kwargs)
         context['deck_id'] = self.kwargs.get('deck_id')
+        context['deck'] = get_object_or_404(Deck, ID__iexact=self.kwargs.get('deck_id'))
         return context
 
 class CardCreate(CreateView):

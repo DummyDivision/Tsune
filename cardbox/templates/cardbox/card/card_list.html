@@ -2,12 +2,10 @@
 {% block title %}Tsune - Kartenliste{% endblock %}
 {% block content %}
     {% include "cardbox/card/card_delete_popup.html" %}
-        {% if object_list %}
-    <h1><a href="{% url 'deck:deck_list' %}">{{ object_list.0.deck.title }}</a></h1>
-    <div class="row">
-
+    <h1><a href="{% url 'deck:deck_list' %}">{{ deck.title }}</a></h1>
+    {% if object_list %}
+        <div class="row">
             {% for card in object_list %}
-
                 <div class="col-md-3">
                     <div class="panel card-overview panel-default" style="position:relative">
                         <a href="{% url 'card:card_detail' card.deck.ID card.ID %}"><span
@@ -15,7 +13,6 @@
 
                         <div class="panel-heading">
                             <b>{{ card.front }}</b>
-
                         </div>
                         <div class="panel-body">{{ card.back }}</div>
                         <div class="panel-footer">
@@ -23,8 +20,8 @@
                                 <div class="col-md-12">
                                     <div class="btn-group">
                                         <a
-                                           onclick="show_delete_popup('{% url 'card:card_delete' card.deck.ID card.ID %}')"
-                                           class="btn btn-default" style="z-index:2">
+                                                onclick="show_delete_popup('{% url 'card:card_delete' card.deck.ID card.ID %}')"
+                                                class="btn btn-default" style="z-index:2">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                         <a href="{% url 'card:card_edit' card.deck.ID card.ID %}"
@@ -54,10 +51,10 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-        {% else %}
-            <div class="row">
-                {% include "cardbox/card/card_newcarddiv.html" %}
-            </div>
-        {% endif %}
         </div>
+    {% else %}
+        <div class="row">
+            {% include "cardbox/card/card_newcarddiv.html" %}
+        </div>
+    {% endif %}
 {% endblock %}
