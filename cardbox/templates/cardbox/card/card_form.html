@@ -22,6 +22,7 @@
                         <div class="controls"></div>
                         {{ form.back }}
                         <a href="#">Weitere Einstellungen...</a>
+                        <input type="hidden" id="id_deck" name="deck" value="{{ deck_id }}">
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -31,7 +32,7 @@
                             <a class="btn btn-primary">Vorschau</a>
                         </div>
                         <div class="col-md-4">
-                            <a class="btn pull-right btn-primary" href="{% url "card:card_list" %}">Abbrechen</a>
+                            <a class="btn pull-right btn-primary" href="{% url "card:card_list" deck_id %}">Abbrechen</a>
                         </div>
                     </div>
                 </form>

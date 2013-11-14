@@ -2,13 +2,15 @@
 {% block title %}Tsune - Kartenliste{% endblock %}
 {% block content %}
     {% include "cardbox/card/card_delete_popup.html" %}
-    <div class="row">
         {% if object_list %}
+    <h1><a href="{% url 'deck:deck_list' %}">{{ object_list.0.deck.title }}</a></h1>
+    <div class="row">
+
             {% for card in object_list %}
 
                 <div class="col-md-3">
                     <div class="panel card-overview panel-default" style="position:relative">
-                        <a href="{% url 'card:card_detail' card.ID %}"><span
+                        <a href="{% url 'card:card_detail' card.deck.ID card.ID %}"><span
                                 class="clickWholeDiv"></span></a>
 
                         <div class="panel-heading">
@@ -21,11 +23,11 @@
                                 <div class="col-md-12">
                                     <div class="btn-group">
                                         <a
-                                           onclick="show_delete_popup('{% url 'card:card_delete' card.ID %}')"
+                                           onclick="show_delete_popup('{% url 'card:card_delete' card.deck.ID card.ID %}')"
                                            class="btn btn-default" style="z-index:2">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
-                                        <a href="{% url 'card:card_edit' card.ID %}"
+                                        <a href="{% url 'card:card_edit' card.deck.ID card.ID %}"
                                            class="btn btn-default" style="z-index:2">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>

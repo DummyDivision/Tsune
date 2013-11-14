@@ -5,14 +5,14 @@ urlpatterns = patterns('',
                        url(r'^(?P<deck_id>\d+)$',
                            card_views.CardList.as_view(template_name="cardbox/card/card_list.html"),
                            name='card_list'),
-                       url(r'^new$', card_views.CardCreate.as_view(
+                       url(r'^(?P<deck_id>\d+)/new$', card_views.CardCreate.as_view(
                            template_name="cardbox/card/card_form.html"),
                            name='card_new'),
-                       url(r'^edit/(?P<pk>\d+)$', card_views.CardUpdate.as_view(
+                       url(r'^(?P<deck_id>\d+)/edit/(?P<pk>\d+)$', card_views.CardUpdate.as_view(
                            template_name="cardbox/card/card_form.html"), name='card_edit'),
-                       url(r'^delete/(?P<pk>\d+)$', card_views.CardDelete.as_view(
+                       url(r'^(?P<deck_id>\d+)/delete/(?P<pk>\d+)$', card_views.CardDelete.as_view(
                            template_name="cardbox/card/card_confirm_delete.html"),
                            name='card_delete'),
-                       url(r'^detail/(?P<pk>\d+)/$', card_views.CardDetailView.as_view(
+                       url(r'^(?P<deck_id>\d+)/detail/(?P<pk>\d+)/$', card_views.CardDetailView.as_view(
                            template_name="cardbox/card/card_detail.html"), name='card_detail')
 )

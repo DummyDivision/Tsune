@@ -7,7 +7,7 @@ class CardForm(ModelForm):
 
     class Meta:
         model = Card
-        fields = ('front', 'back')
+        fields = ('front', 'back', 'deck')
         widgets = {
             'front': Textarea(attrs={'class': "form-control"}),
             'back': Textarea(attrs={'class': "form-control"}),

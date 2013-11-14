@@ -12,11 +12,11 @@
 
                     <div class="row">
                         <a class="btn btn-primary btn-lg col-md-2"
-                           onclick="show_delete_popup('{% url 'card:card_delete' object.ID %}')"
+                           onclick="show_delete_popup('{% url 'card:card_delete' object.deck.ID object.ID %}')"
                            style="text-align:center">L&ouml;schen</a>
                         <a class="btn btn-primary btn-lg col-md-offset-8 col-md-2"
                             style="text-align:center"
-                            href="{% url 'card:card_list' %}">Zur&uuml;ck</a>
+                            href="{% url 'card:card_list' object.deck.ID %}">Zur&uuml;ck</a>
                     </div>
                 </div>
             </div>
