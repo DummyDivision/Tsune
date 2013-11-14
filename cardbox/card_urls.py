@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from cardbox import card_views
 
 urlpatterns = patterns('',
-                       url(r'^$',
+                       url(r'^(?P<deck_id>\d+)$',
                            card_views.CardList.as_view(template_name="cardbox/card/card_list.html"),
                            name='card_list'),
                        url(r'^new$', card_views.CardCreate.as_view(

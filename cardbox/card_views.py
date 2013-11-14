@@ -2,17 +2,21 @@
 # TODO: user authentification
 # TODO: comments
 from django.http import HttpResponseForbidden
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from cardbox.card_forms import CardForm
 
 from cardbox.card_model import Card
-
+from cardbox.deck_model import Deck
 
 class CardList(ListView):
     model = Card
+
+    def get_queryset(self):
+        deck = get_object_or_404(Deck, ID__iexact=self.kwargs.get('deck_id'))
+        return Card.objects.filter(deck=deck)
 
 
 class CardCreate(CreateView):

@@ -14,6 +14,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:go.contrib.admindocs.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^cardbox/deck/', include('cardbox.deck_urls', namespace="deck")),
-    url(r'^cardbox/card/', include('cardbox.card_urls', namespace="card")),
+    url(r'^cardbox/', include('cardbox.deck_urls', namespace="deck")),
+    url(r'^cardbox/cards/', include('cardbox.card_urls', namespace="card")),
 )

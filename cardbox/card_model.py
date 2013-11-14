@@ -1,11 +1,12 @@
 # TODO: Connection with deck
 from django.db import models
 from django.core.urlresolvers import reverse
+from cardbox.deck_model import Deck
 
 
 class Card(models.Model):
     ID = models.AutoField(primary_key=True)
-    # Deck = models.ManyToManyField('Stapel')
+    deck = models.ForeignKey(Deck)
     front = models.CharField(max_length=512)
     back = models.CharField(max_length=512)
     created = models.DateTimeField(auto_now_add=True)
