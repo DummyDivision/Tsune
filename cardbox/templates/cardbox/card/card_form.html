@@ -5,6 +5,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron">
+                {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissable">
+                               <button type="button" class="close" data-dismiss="alert">&times;</button>
+                               <b>Fehler!</b>
+                            </div>
+                {% endif %}
                 <form method="post">{% csrf_token %}
                     <h1>Karte {{ action }}</h1>
 
