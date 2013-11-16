@@ -1,16 +1,16 @@
 {% extends "cardbox/base.html" %}
+{% load guardian_tags %}
 {% block title %}Tsune - Kartenliste{% endblock %}
 {% block content %}
     {% include "cardbox/deck/deck_delete_popup.html" %}
     <div class="row cardstacks" style="margin-top:-15px;">
         {% if object_list %}
             {% for deck in object_list %}
-
+                {% get_obj_perms user for deck as "deck_perms" %}
                 <div class="col-md-3">
                     <div class="thumbnail cardstack" style="padding: 0; position:relative">
                         <a href="{% url 'deck:deck_detail' deck.ID%}"><span
                                 class="clickWholeDiv"></span></a>
-
                         <div class="caption">
                             <h2 class="wordwrap">{{ deck.title }} </h2>
 
@@ -65,15 +65,19 @@
                             <div class="row" style="text-align: center;">
                                 <div class="col-md-12">
                                     <div class="btn-group">
+                                        {% if "delete_deck" in deck_perms %}
                                         <a class="btn btn-default"
                                            onclick="show_delete_popup('{% url 'deck:deck_delete' deck.ID %}')"
                                            class="btn btn-primary" style="z-index:2">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
+                                        {% endif %}
+                                        {% if "change_deck" in deck_perms %}
                                         <a href="{% url 'deck:deck_edit' deck.ID %}"
                                            class="btn btn-default" style="z-index:2">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'guardian',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'authentication',
@@ -204,6 +205,15 @@ STATICFILES_DIRS = (
 LOGIN_URL = '/user/login/'
 LOGOUT_URL = '/user/logout/'
 LOGIN_REDIRECT_URL = '/cardbox/'
+
+# Settings for guardian.
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+ANONYMOUS_USER_ID = -1
 
 # Include local_settings.py
 try:

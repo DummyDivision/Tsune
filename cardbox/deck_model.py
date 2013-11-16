@@ -9,6 +9,9 @@ class Deck(models.Model):
     description = models.CharField(max_length=512)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        permissions = (('view_deck', 'Can view deck'),)
+
     def __unicode__(self):
         return self.title
 
