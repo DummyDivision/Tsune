@@ -1,5 +1,5 @@
 ===================
-Cardbox Module
+Cardbox Modules
 ===================
 
 .. automodule:: cardbox.tests
