@@ -6,15 +6,24 @@
 Welcome to Tsune's documentation!
 =================================
 
+This project is a web application for managing and learning flash cards.
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
 
    intro
+   develop
+   deploy
+
+Apps and Features
+=================
+.. toctree::
+   :maxdepth: 1
+
    cardbox/overview
-
-
 
 Indices and tables
 ==================
