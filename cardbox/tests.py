@@ -1,14 +1,23 @@
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+.. module:: tests
+    :platform: Unix, Windows
+    :synopsis: A useful model indeed
 
-Replace this with more appropriate tests for your application.
+.. moduleauthor:: Andreas Waigand <awaigand@gmx.net>
+
 """
 
 from django.test import TestCase
 
 
 class SimpleTest(TestCase):
+    """ This is a simple testclass
+
+    .. note::
+       An example of intersphinx is this: you **cannot** use :mod:`pickle` on this class. Blub.
+
+    """
+
     def test_basic_addition(self):
         """
         Tests that 1 + 1 always equals 2.
