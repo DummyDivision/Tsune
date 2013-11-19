@@ -22,6 +22,8 @@ sys.path.insert(0, os.path.abspath('../'))
 
 from django.conf import settings
 settings.configure()
+settings.STATIC_URL = 'static/'
+settings.STATIC_ROOT = 'staticfiles'
 
 
 # -- General configuration -----------------------------------------------------
