@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,6 +15,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:go.contrib.admindocs.urls')),
 
+    url(r'^$', lambda x: HttpResponseRedirect('/cardbox/')),  # redirect to /cardbox/
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include('authentication.urls')),
     url(r'^cardbox/', include('cardbox.deck_urls', namespace="deck")),
