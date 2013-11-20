@@ -68,13 +68,13 @@
                                         {% if "delete_deck" in deck_perms %}
                                         <a class="btn btn-default"
                                            onclick="show_delete_popup('{% url 'deck:deck_delete' deck.ID %}')"
-                                           class="btn btn-primary" style="z-index:2">
+                                           class="btn btn-primary" style="z-index:2" title="Deck l&ouml;schen">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </a>
                                         {% endif %}
                                         {% if "change_deck" in deck_perms %}
                                         <a href="{% url 'deck:deck_edit' deck.ID %}"
-                                           class="btn btn-default" style="z-index:2">
+                                           class="btn btn-default" style="z-index:2" title="Deck bearbeiten">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                         {% endif %}
