@@ -25,10 +25,10 @@
           <ul class="dropdown-menu">
             <li>
               <a href="http://tsune.readthedocs.org" target="_blank">Dokumentation</a>
-            </li>
+            </li>{% if user.is_authenticated %}
             <li>
               <a href="{% url 'logout' %}">Logout</a>
-            </li>
+            </li>{% endif %}
           </ul>
         </li>
       </ul>
