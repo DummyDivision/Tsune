@@ -17,6 +17,7 @@ Contents:
    intro
    develop
    deploy
+   faq
 
 Apps and Features
 =================
