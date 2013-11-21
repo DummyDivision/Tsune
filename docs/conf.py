@@ -21,9 +21,11 @@ import os
 sys.path.insert(0, os.path.abspath('../'))
 
 from django.conf import settings
+
 settings.configure()
 settings.STATIC_URL = 'static/'
 settings.STATIC_ROOT = 'staticfiles'
+settings.ANONYMOUS_USER_ID = '-1'
 
 
 # -- General configuration -----------------------------------------------------
@@ -33,13 +35,19 @@ settings.STATIC_ROOT = 'staticfiles'
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.pngmath', 'sphinx.ext.mathjax', 'sphinx.ext.viewcode']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx' ,'sphinx.ext.pngmath', 'sphinx.ext.mathjax', 'sphinx.ext.viewcode', 'sphinxcontrib.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
+
+intersphinx_mapping = {
+    'python': ('http://python.readthedocs.org/en/v2.7.2/', None),
+    'django': ('http://django.readthedocs.org/en/1.5.x/', None),
+    'sphinx': ('http://sphinx.readthedocs.org/en/latest/', None),
+    }
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -72,7 +80,7 @@ release = '0.1a'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ['_build','']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -248,3 +256,9 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+import sphinx_rtd_theme
+
+html_theme = "sphinx_rtd_theme"
+
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
