@@ -1,6 +1,5 @@
 from django.contrib import admin
-from deck_model import Deck
-from card_model import Card
+from card_model import Card, Deck
 from guardian.admin import GuardedModelAdmin
 
 admin.site.register(Deck, GuardedModelAdmin)
