@@ -17,7 +17,9 @@ Contents:
    intro
    develop
    deploy
+   requirements
    faq
+
 
 Apps and Features
 =================
