@@ -1,0 +1,75 @@
+<div class="thumbnail cardstack" style="padding: 0; position:relative">
+                        <a href="{% url 'deck:deck_detail' deck.ID%}"><span
+                                class="clickWholeDiv"></span></a>
+                        <div class="caption">
+                            <h2 class="wordwrap">{{ deck.title }} </h2>
+
+                            <p class="wordwrap">{{ deck.description }}</p>
+
+                            <div class="row" style="text-align:center">
+                                <div class="col-md-12">
+                                    <a class="btn btn-primary" style="position:relative; z-index: 2"
+                                       href="#">Lernen</a>
+                                    <a class="btn btn-primary" style="position:relative; z-index: 2"
+                                       href="{% url 'card:card_list' deck.ID %}">Karten anzeigen</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <div class="progress">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" style="width: 100%">
+                                        <span class="sr-only">35% Complete (success)</span>
+                                    </div>
+                                    <div class="progress-bar progress-bar-warning" style="width: 0%">
+                                        <span class="sr-only">20% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <b>PRIVATE</b><br>
+                                    <small>SHARED</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <b>0</b><br>
+                                    <small>DUE</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <b>{{ deck.get_total_cards }}</b><br>
+                                    <small>TOTAL</small>
+                                </div>
+                            </div>
+                            <p></p>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <b>BY:</b>
+                                </div>
+                                <div class="col-md-8">
+                                    <small><a style="z-index: 2" href="#">YOURSELF</a></small>
+                                </div>
+                            </div>
+                            <p></p>
+
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-12">
+                                    <div class="btn-group">
+                                        {% if "delete_deck" in deck_perms %}
+                                        <a class="btn btn-default"
+                                           onclick="show_delete_popup('{% url 'deck:deck_delete' deck.ID %}')"
+                                           class="btn btn-primary" style="z-index:2" title="Deck l&ouml;schen">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                        {% endif %}
+                                        {% if "change_deck" in deck_perms %}
+                                        <a href="{% url 'deck:deck_edit' deck.ID %}"
+                                           class="btn btn-default" style="z-index:2" title="Deck bearbeiten">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
