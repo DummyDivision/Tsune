@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'guardian',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'deckglue',
     'authentication',
     'cardbox',
 )
