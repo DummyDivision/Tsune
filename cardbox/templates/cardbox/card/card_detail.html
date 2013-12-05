@@ -1,27 +1,19 @@
 {% extends "cardbox/base.html" %}
 {% block title %}Tsune - Kartenansicht{% endblock %}
 {% block content %}
-    {% include "cardbox/card/card_delete_popup.html" %}
+    {% block delete %}
+        {% include "cardbox/card/card_delete_popup.html" %}
+    {% endblock %}
     <div class="row">
         <div class="col-md-12">
             <div class="jumbotron learning">
-                <div class="container wordwrap">
-                    <h1 id="question">{{ object.front }}</h1>
-
-                    <p id="answer" style="height: 240px;">{{ object.back }}</p>
-                </div>
+                {% block card_content %}
+                    {% include "cardbox/card/card_content.html" %}
+                {% endblock %}
             </div>
         </div>
     </div>
-         <div class="jumbotron" style="height:50px; padding:1px; text-align: center">
-                        <a class="btn btn-primary"
-                            style="text-align:center; width:10em"
-                            href="{% url 'card:card_list' object.deck.ID %}">Zur&uuml;ck</a>
-                        <a class="btn btn-primary col-md-offset-3"
-                           onclick="show_delete_popup('{% url 'card:card_delete' object.deck.ID object.ID %}')"
-                           style="text-align:center; width:10em">L&ouml;schen</a>
-                        <a class="btn btn-primary col-md-offset-3"
-                            style="text-align:center; width:10em"
-                            href="{% url 'card:card_edit' object.deck.ID object.ID %}">Bearbeiten</a>
-         </div>
+    {% block buttons %}
+         {% include "cardbox/card/card_detail_buttonbar.html" %}
+    {% endblock %}
 {% endblock %}
