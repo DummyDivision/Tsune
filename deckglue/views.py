@@ -6,6 +6,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import TemplateView
 from cardbox.deck_views import DeckList
+from deckglue.models import DelayablePractice
 from memorize.models import Practice
 from memorize.algorithm import interval
 from cardbox.card_model import Card
@@ -18,7 +19,7 @@ class PracticeDeckList(DeckList):
     """
     def get_queryset(self):
         deck_list = super(PracticeDeckList,self).queryset()
-        all_due_cards_for_user = Practice.objects.filter(next_practice__lte = datetime.datetime.utcnow().replace(tzinfo=utc), user=self.request.user)
+        all_due_cards_for_user = DelayablePractice.objects.filter(next_practice__lte = datetime.datetime.utcnow().replace(tzinfo=utc), user=self.request.user)
         for deck in deck_list:
             card_ids = Card.objects.filter(deck=deck).values_list("ID", flat=True)
             deck.due_cards = all_due_cards_for_user.filter(object_id__in=card_ids).count()
@@ -89,12 +90,10 @@ def process_rating(request):
 
     """
 
-    practice_item = get_object_or_404(Practice,
+    practice_item = get_object_or_404(DelayablePractice,
                                       pk=int(request.POST['id']))
-    print request.POST
     if request.POST['force'] == 'False':
         rating = int(request.POST['rating_value'])
-        print rating
         if rating == -1:
             practice_item.delay()
         elif rating >= 0 and rating <= 4:
