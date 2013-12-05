@@ -22,14 +22,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="submit" onclick="this.disabled=true,this.form.submit();"
-                                   value="{{ button_text }}" class="btn btn-primary"/>
+                            <a class="btn btn-primary" href="{% url "deck:deck_list" %}">Abbrechen</a>
                         </div>
                         <div class="col-md-4" style="text-align:center">
                             <a class="btn btn-primary">Vorschau</a>
                         </div>
                         <div class="col-md-4">
-                            <a class="btn pull-right btn-primary" href="{% url "deck:deck_list" %}">Abbrechen</a>
+                            <input type="submit" onclick="this.disabled=true,this.form.submit();"
+                                   value="{{ button_text }}" class="btn pull-right btn-primary"/>
                         </div>
                     </div>
                 </form>

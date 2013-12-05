@@ -7,20 +7,18 @@
         <h1>Karte l&ouml;schen? </h1>
 
         <div class="row" style="text-align:center">
+            <form id="delete_popup_form" method="POST" action="#">
+                {% csrf_token %}
 
+                <div class="col-md-4">
+                    <a class="btn btn-primary" onclick="hide_delete_popup()">Abbrechen</a>
+                </div>
 
-            <div class="col-md-4">
-                <form id="delete_popup_form" method="POST" action="#">
-                    {% csrf_token %}
-                    <button type="submit" onclick="this.disabled=true,this.form.submit();" value="DELETE" class="btn btn-primary">Löschen
-                    </button>
-                </form>
-            </div>
-
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <a class="btn btn-primary" onclick="hide_delete_popup()">Abbrechen</a>
-            </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <button type="submit" onclick="this.disabled=true,this.form.submit();" value="DELETE" class="btn btn-primary">Löschen</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
