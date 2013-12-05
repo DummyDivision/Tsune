@@ -4,7 +4,7 @@ Feature: Sign in
   I want to sign in
 
   Background:
-    Given I am on the login page
+    Given I go to the login page
 
   Scenario: Sign in is successful
     Given "testuser" is the name of a registered user

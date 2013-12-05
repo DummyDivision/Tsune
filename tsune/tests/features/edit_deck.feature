@@ -9,11 +9,11 @@ Feature: Edit Deck
     And I see the edit deck dialog
     
   Scenario: Change the name of a deck
-    Given the deck "Moderne Datenbanken" does not exists in my portfolio
+    Given the deck "Moderne Datenbanken" does not exist in my portfolio
     When I change the value of the field "name" to "Moderne Datenbanken"
     Then the deck has the name "Moderne Datenbanken"
     
   Scenario: A deck with that name already exists
     Given the deck "Moderne Datenbanken" exists in my portfolio
     When I change the value of the field "name" to "Moderne Datenbanken"
-    Then I see the error message "Ein Stapel mit diesem Namen existiert bereits"
+    Then I see the message "Ein Stapel mit diesem Namen existiert bereits"

@@ -5,7 +5,7 @@ Feature: Create Card
   
   Background:
     Given I am logged in
-    And the deck "Datenbanken" exists
+    And the deck "Datenbanken" exists in my portfolio
   
   Scenario: Create a new card in a specified deck
     Given the card "foo?" does not exist in the deck "Datenbanken"
@@ -18,7 +18,7 @@ Feature: Create Card
   
   Scenario: A card with this front already exists in the specified deck
     Given the card "foo?" exists in the deck "Datenbanken"
-    When I create a card in "Datenbanken" with the field "front" set to "foo?"
+    When I create a card in the deck "Datenbanken" with the field "front" set to "foo?"
     Then I see the message "Diese Karte existiert bereits"
     
   Scenario: Required field was left blank
