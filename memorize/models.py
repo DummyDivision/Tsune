@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-import datetime
+
 from django.utils.timezone import utc
 
 from django.db import models
@@ -27,8 +27,8 @@ class Practice(models.Model):
     def set_next_practice(self, rating):
         self.times_practiced += 1
         minutes, ef = interval(self.times_practiced, rating, self.easy_factor)
-        self.next_practice = datetime.datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=minutes)
+        self.next_practice = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=minutes)
         self.easy_factor = ef
 
     def delay(self):
-        self.next_practice = datetime.utcnow().replace(utc) + timedelta(minutes=10)
+        self.next_practice = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=10)
