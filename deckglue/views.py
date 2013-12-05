@@ -1,4 +1,37 @@
-# Create your views here.
+from __future__ import division
+import datetime
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.views.generic.base import TemplateView
+from cardbox.deck_views import DeckList
+from memorize.models import Practice
+from memorize.algorithm import interval
+from cardbox.card_model import Card
+from django.utils.timezone import utc
+from cardbox.card_views import CardUpdate
+
+class PracticeDeckList(DeckList):
+    """Adds due cards to DeckList overview.
+
+    """
+    def get_queryset(self):
+        deck_list = super(PracticeDeckList,self).queryset()
+        all_due_cards_for_user = Practice.objects.filter(next_practice__lte = datetime.datetime.utcnow().replace(tzinfo=utc), user=self.request.user)
+        for deck in deck_list:
+            card_ids = Card.objects.filter(deck=deck).values_list("ID", flat=True)
+            deck.due_cards = all_due_cards_for_user.filter(object_id__in=card_ids).count()
+            try:
+                deck.due_percentage = (deck.due_cards/deck.get_total_cards()) * 100
+            except ZeroDivisionError:
+                deck.due_percentage = 0
+            deck.not_due = 100 - deck.due_percentage
+            print deck.due_percentage
+            print deck.not_due
+            print deck.due_cards
+            print deck.get_total_cards()
+        return deck_list
 class next_practice_item(TemplateView):
 
 
