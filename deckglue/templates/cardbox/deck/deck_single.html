@@ -1,3 +1,4 @@
+{% load l10n %}
 <div class="thumbnail cardstack" style="padding: 0; position:relative">
                         <a href="{% url 'deck:deck_detail' deck.ID%}"><span
                                 class="clickWholeDiv"></span></a>
@@ -9,7 +10,7 @@
                             <div class="row" style="text-align:center">
                                 <div class="col-md-12">
                                     <a class="btn btn-primary" style="position:relative; z-index: 2"
-                                       href="#">Lernen</a>
+                                       href="{% url 'learning:learning' deck.ID %}">Lernen</a>
                                     <a class="btn btn-primary" style="position:relative; z-index: 2"
                                        href="{% url 'card:card_list' deck.ID %}">Karten anzeigen</a>
                                 </div>
@@ -18,11 +19,11 @@
                         <div class="modal-footer" style="text-align: left">
                             <div class="progress">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success" style="width: 100%">
-                                        <span class="sr-only">35% Complete (success)</span>
-                                    </div>
-                                    <div class="progress-bar progress-bar-warning" style="width: 0%">
+                                    <div class="progress-bar progress-bar-warning" style="width: {{ deck.due_percentage|unlocalize }}%">
                                         <span class="sr-only">20% Complete (warning)</span>
+                                    </div>
+                                    <div class="progress-bar progress-bar-success" style="width: {{ deck.not_due|unlocalize }}%">
+                                        <span class="sr-only">35% Complete (success)</span>
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                                     <small>SHARED</small>
                                 </div>
                                 <div class="col-md-4">
-                                    <b>0</b><br>
+                                    <b>{{ deck.due_cards }}</b><br>
                                     <small>DUE</small>
                                 </div>
                                 <div class="col-md-4">
