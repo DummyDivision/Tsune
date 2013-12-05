@@ -32,6 +32,18 @@ class PracticeDeckList(DeckList):
             print deck.due_cards
             print deck.get_total_cards()
         return deck_list
+
+class PracticeCardUpdate(CardUpdate):
+    """Enables Editing from Learning View.
+
+    """
+    def get_success_url(self):
+        if 'learning' in self.request.GET:
+            #Shows answers on return
+            return reverse('learning:learning', args=( self.kwargs.get('deck_id'),))+"?showAnswer=true"
+        else:
+            return super(PracticeCardUpdate,self).get_success_url()
+
 class next_practice_item(TemplateView):
 
 
