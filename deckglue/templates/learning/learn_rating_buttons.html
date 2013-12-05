@@ -1,0 +1,42 @@
+<div class="jumbotron" style="height:65px; padding:1px; text-align: center">
+    <form id="rating" action="{% url 'learning:learning_post' %}" method="post">
+        {% csrf_token %}
+        <div class="row" style="padding-top:3px">
+            <div class="col-md-2 col-md-offset-1">
+                <a class="small-margin btn btn-primary " onclick="$('#rating_value').val('-1'), $('#rating').submit();">Nochmal<br>
+                    <small>+10 min</small>
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a class="small-margin btn btn-primary" name="hard"
+                   onclick="$('#rating_value').val('0'), $('#rating').submit();">Schwer<br>
+                    <small>+ {{ hard_time }} m</small>
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a class="small-margin btn btn-primary" name="normal"
+                   onclick="$('#rating_value').val('2'), $('#rating').submit();"">Normal<br>
+                <small>+{{ normal_time }} m</small>
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a class="small-margin btn btn-primary" name="easy"
+                   onclick="$('#rating_value').val('4'), $('#rating').submit();"">Einfach<br>
+                <small>+{{ easy_time }} m</small>
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a class="small-margin btn btn-primary"
+                   href="{% url 'card:card_edit' object.deck.ID object.ID %}?learning=true" style="text-align:center">Karte<br>bearbeiten</a>
+            </div>
+        </div>
+        <input type="hidden" id="rating_value" name="rating_value" value="0"/>
+        <input type="hidden" name="id" value="{{ id }}"/>
+        <input type="hidden" name="force" value="{{ force }}"/>
+    </form>
+             <span id="preanswer">
+               <a class="btn btn-primary"
+                  onclick="show_answer()"
+                  style="text-align:center; width:10em">Antwort anzeigen</a>
+                 </span>
+</div>

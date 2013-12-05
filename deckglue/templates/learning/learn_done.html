@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+    <div style="text-align: center;">
+        <h1>Du hast keine Karten mehr zum lernen!</h1>
+        <h3>Herzlichen Glückwunsch. Vielleicht solltest du jetzt mal etwas anderes tun.</h3>
+        <img src="http://imgs.xkcd.com/comics/tape_measure.png"/>
+    </div>
+    <a class="btn btn-primary" href="{% url "deck:deck_list" %}">Zu den Decks</a>
+    </div>
+{% endblock %}
