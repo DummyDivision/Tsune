@@ -32,10 +32,6 @@ class PracticeDeckList(DeckList):
             except ZeroDivisionError:
                 deck.due_percentage = 0
             deck.not_due = 100 - deck.due_percentage
-            print deck.due_percentage
-            print deck.not_due
-            print deck.due_cards
-            print deck.get_total_cards()
         return deck_list
 
 class PracticeCardUpdate(CardUpdate):
