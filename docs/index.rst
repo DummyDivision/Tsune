@@ -21,13 +21,6 @@ Contents:
    faq
 
 
-Apps and Features
-=================
-.. toctree::
-   :maxdepth: 1
-
-   cardbox/overview
-
 Indices and tables
 ==================
 

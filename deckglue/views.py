@@ -16,6 +16,10 @@ from cardbox.card_views import CardUpdate
 class PracticeDeckList(DeckList):
     """Adds due cards to DeckList overview.
 
+    This is an extension of :class:`tsune.cardbox.deck_views.DeckList` which overwrites
+    the get_queryset function to add the number of due cards and due percentage to
+    the deck view.
+
     """
     def get_queryset(self):
         deck_list = super(PracticeDeckList,self).queryset()
@@ -36,6 +40,10 @@ class PracticeDeckList(DeckList):
 
 class PracticeCardUpdate(CardUpdate):
     """Enables Editing from Learning View.
+
+    This is an extension of the :class:`tsune.cardbox.card_views.CardUpdate` which
+    overwrites the get_success_url function to return to the right site if the editing
+    is started from the learning view as opposed to the decklist view.
 
     """
     def get_success_url(self):
@@ -71,6 +79,9 @@ class next_practice_item(TemplateView):
 
     def get_context_data(self, **kwargs):
         """ Prepares the practice item and sets the started_last_viewing of the practice model.
+
+        It also calculates the time which each choice of difficulty will add. Should be changed
+        if the time calculating algorithm changes.
 
         """
         context = super(next_practice_item, self).get_context_data(**kwargs)
