@@ -24,13 +24,18 @@ def quit_browser(total):
 # User and login related steps.
 @step (u'I am on (.*)')
 def am_on_page(step, page):
-    # Web driver: Check if on page.
-    assert False, 'This step must be implemented'
+    if page == "the main page":
+        expected_url = world.tsune_root + '/cardbox/'
+    else:
+        expected_url = page
+    assert world.browser.url == expected_url, 'The url seems to be wrong.'
 
 @step(u'I enter "([^"]*)" and "([^"]*)"')
 def enter_username_and_password(step, username, password):
     # Web driver: fill in data and hit enter.
-    assert False, 'This step must be implemented'
+    world.browser.fill("username", username)
+    world.browser.fill("password", password)
+    world.browser.find_by_value('login').click()
 
 @step(u'"([^"]*)" is the name of a registered user')
 def is_the_name_of_registered_user(step, username):
@@ -50,7 +55,7 @@ def password_is_wrong(step):
 @step(u'I see the message "([^"]*)"')
 def see_message(step, message):
     # Web driver: find message on page.
-    assert False, 'This step must be implemented'
+    assert world.browser.is_text_present(message), 'Expected message was not found.'
 
 @step(u'"([^"]*)" is not the name of a registered user')
 def user_is_not_registered(step, username):
@@ -112,8 +117,12 @@ def create_deck(step, deck):
 
 @step(u'I go to (.*)')
 def go_to_page(step, page):
-     # Web driver: Got to page
-    assert False, "this step must be implemented"
+     # If the site name is used, map it to the actual url.
+    if page == u'the login page':
+        url = '/user/login/'
+    else:
+        url = page
+    world.response = world.browser.visit(world.tsune_root + url)
 
 @step(u'I see the deck "([^"]*)" in my portfolio')
 def see_deck_in_portfolio(step, deck):
