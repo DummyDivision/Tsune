@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	end
 
 	# Install the stuff to which no reasonable cookbook exists yet.
-	config.vm.provision :shell, :inline => "sudo apt-get -y install libpq-dev python-dev"
+	config.vm.provision :shell, :inline => "sudo apt-get -y install libpq-dev python-dev firefox xvfb"
 	config.vm.provision :shell, :inline => "sudo pip install -r /vagrant/requirements.txt"
 	config.vm.provision :shell, :inline => "sudo /opt/vagrant_ruby/bin/gem install foreman"
 end

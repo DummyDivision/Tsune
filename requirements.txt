@@ -9,3 +9,6 @@ django-guardian==1.1.1
 Sphinx==1.1.3
 sphinxcontrib-napoleon==0.2.1
 sphinx-rtd-theme==0.1.5
+lettuce==0.2.19
+splinter==0.5.4
+PyVirtualDisplay==0.1.2
