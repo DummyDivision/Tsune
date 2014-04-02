@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'deckglue',
+    'social.apps.django_app.default',
     'memorize',
     'authentication',
     'cardbox',
@@ -213,7 +214,24 @@ LOGIN_REDIRECT_URL = '/cardbox/'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'guardian.backends.ObjectPermissionBackend',
+      'social.backends.open_id.OpenIdAuth',
+      'social.backends.google.GoogleOpenId',
+      'social.backends.google.GoogleOAuth2',
+      'social.backends.google.GoogleOAuth',
+      'social.backends.twitter.TwitterOAuth',
+      'social.backends.yahoo.YahooOpenId',
+      'django.contrib.auth.backends.ModelBackend',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django.core.context_processors.static",
+"django.core.context_processors.tz",
+"django.contrib.messages.context_processors.messages",
+"social.apps.django_app.context_processors.backends",
+"social.apps.django_app.context_processors.login_redirect",);
 
 ANONYMOUS_USER_ID = -1
 
