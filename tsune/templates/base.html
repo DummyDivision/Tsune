@@ -17,6 +17,9 @@
   {% block nav %}
     <nav class="navbar" role="navigation">
       <ul class="nav navbar-nav navbar-default navbar-right">
+        {% if user.is_authenticated %}
+        <li><p class="navbar-text">{{  user.email }}</p></li>
+        {% endif %}
         <li><a href="{% url 'deck:deck_list' %}"><span class="glyphicon glyphicon-th"></span>&nbsp;Meine Decks</a></li>
         <li>
           <a href="#" id="settingsPop"><span class="glyphicon glyphicon-cog"></span>&nbsp;Einstellungen</a>
