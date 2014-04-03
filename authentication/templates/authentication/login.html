@@ -38,10 +38,14 @@
                             value="login">Einloggen</button>
                     <span class="clearfix"></span>
                 </form>
-                <div class="row"><div class="col-md-12"> <a href="{% url 'social:begin' 'google-oauth' %}"><img src="{% static "images/google_red_signin.png" %}"/></a></div></div>
-                <div class="row"><div class="col-md-offset-1 col-md-10"> <a href="http://tsune.readthedocs.org/en/latest/"
-                       class="pull-right need-help">Brauchst Du Hilfe? Lies die Dokumentation</a></div></div>
+                {% if secrets_present %}
+                <div class="row">{% include "authentication/social_login.html" %}</div>
+                {% else %}
+                <div class="col-md-12"><a href="{% url 'social:begin' 'google-oauth' %}"><img src="{% static "images/google_red_signin.png" %}"/></a></div>
+                {% endif %}
 
+                <div class="row"><div class="col-md-offset-1 col-md-10"> <a href="http://tsune.readthedocs.org/en/latest/"
+                       class="pull-right need-help">Brauchst Du Hilfe? Lies die Dokumentations{{ secrets_present }}</a></div></div>
             </div>
         </div>
     </div>
