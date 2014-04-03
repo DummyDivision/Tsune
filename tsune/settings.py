@@ -252,3 +252,9 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+#Include secrets.py
+try:
+    from secrets import *
+except ImportError:
+    SECRETS_PRESENT = False
