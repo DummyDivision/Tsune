@@ -19,5 +19,8 @@ local_settings.py
 # Heroku files
 staticfiles/
 
+# Generated Diagrams
+automation/output
+
 # Build Documentation
 docs/_build
