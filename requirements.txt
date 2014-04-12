@@ -15,3 +15,5 @@ PyVirtualDisplay==0.1.2
 python-social-auth==0.1.23
 python-openid==2.2.5
 python-oauth2==0.6.0
+astroid==1.0.1
+pylint==0.25.0
