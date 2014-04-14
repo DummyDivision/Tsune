@@ -21,4 +21,3 @@ staticfiles/
 
 # Build Documentation
 docs/_build
-tsune/secrets.py
