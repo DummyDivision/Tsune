@@ -17,3 +17,5 @@ python-openid==2.2.5
 python-oauth2==0.6.0
 astroid==1.0.1
 pylint==0.25.0
+django-markitup==2.1
+markdown==2.4
