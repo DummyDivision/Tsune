@@ -71,6 +71,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    '/usr/local/lib/python2.7/dist-packages/markitup/static/markitup/'
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -149,6 +150,7 @@ INSTALLED_APPS = (
     'memorize',
     'authentication',
     'cardbox',
+    'markitup',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -245,6 +247,16 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 "django.contrib.messages.context_processors.messages",
 "social.apps.django_app.context_processors.backends",
 "social.apps.django_app.context_processors.login_redirect")
+
+
+#Markitup Settings
+
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True})
+MARKITUP_SET = 'markitup/sets/markdown'
+MARKITUP_SKIN = 'markitup/skins/markitup'
+
+#Social Auth Scopes
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
