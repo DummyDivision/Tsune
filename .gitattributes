@@ -1,0 +1,4 @@
+# Special rules for line-endings, data types, etc
+
+# Declare files that will always have LF line endings on checkout.
+automation/generate-alldiagrams.sh text eol=lf
