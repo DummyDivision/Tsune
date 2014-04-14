@@ -243,7 +243,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 "django.core.context_processors.tz",
 "django.contrib.messages.context_processors.messages",
 "social.apps.django_app.context_processors.backends",
-"social.apps.django_app.context_processors.login_redirect",);
+"social.apps.django_app.context_processors.login_redirect")
 
 ANONYMOUS_USER_ID = -1
 
