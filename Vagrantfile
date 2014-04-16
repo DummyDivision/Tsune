@@ -77,10 +77,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	end
 
 	# Install the stuff to which no reasonable cookbook exists yet.
-	config.vm.provision :shell, :inline => "sudo apt-get -y install libpq-dev python-dev firefox xvfb graphviz"
+	config.vm.provision :shell, :inline => "sudo apt-get -y install libpq-dev python-dev firefox xvfb graphviz git-core"
 	config.vm.provision :shell, :inline => "sudo pip install -r /vagrant/requirements/docs.txt"
 	config.vm.provision :shell, :inline => "sudo pip install -r /vagrant/requirements/unittests.txt"
 	config.vm.provision :shell, :inline => "sudo /opt/vagrant_ruby/bin/gem install foreman"
 	# For setting environment variables, we download a custom .bash_profile
 	config.vm.provision :shell, :inline => "sudo su vagrant -c \"wget https://www.dropbox.com/s/ltevlqd2kn97iay/.bash_profile?dl=1 -O .bash_profile\""
+	# Install development version of lettuce, which is patched for Django 1.55+
+	config.vm.provision :shell, :inline => "sudo pip install -e git+https://github.com/gabrielfalcao/lettuce.git#egg=lettuce"
 end
