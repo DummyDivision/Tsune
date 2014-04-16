@@ -12,7 +12,7 @@ class Card(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.front
+        return self.front.raw
 
     def get_absolute_url(self):
         """Returns the unique url to this object"""
