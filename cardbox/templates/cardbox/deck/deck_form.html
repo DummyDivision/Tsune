@@ -12,7 +12,7 @@
                     </div>
                 {% endif %}
                 <form method="post">{% csrf_token %}
-                    <h1>Deck {{ action }}</h1>
+                    <h2 class="card-h2">Deck {{ action }}</h2>
                     <div class="form-group">
                         <label class="form-label">Titel</label>
                         {{ form.title }}

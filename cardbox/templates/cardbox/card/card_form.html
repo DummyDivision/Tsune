@@ -3,7 +3,7 @@
 {% block content %}
     {{ form.media }}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3">
             <div class="jumbotron">
                 {% if form.errors %}
                             <div class="alert alert-danger alert-dismissable">
@@ -12,7 +12,7 @@
                             </div>
                 {% endif %}
                 <form method="post">{% csrf_token %}
-                    <h1>Karte {{ action }}</h1>
+                    <h2 class="card-h2">Karte {{ action }}</h2>
 
                     <div class="form-group">
                         <label class="form-label">Vorderseite</label></br>

@@ -34,3 +34,7 @@ span.clickWholeDiv {
 .wordwrap{
     word-wrap: break-word;
 }
+.card-h2 {
+    font-size: 40px;
+    font-weight: bold;
+}

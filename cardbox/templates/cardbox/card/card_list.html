@@ -19,14 +19,14 @@
                             <div class="row" style="text-align: center;">
                                 <div class="col-md-12">
                                     <div class="btn-group">
+                                        <a href="{% url 'card:card_edit' card.deck.ID card.ID %}"
+                                           class="btn btn-default" style="z-index:2" title="Karte bearbeiten">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
                                         <a
                                                 onclick="show_delete_popup('{% url 'card:card_delete' card.deck.ID card.ID %}')"
                                                 class="btn btn-default" style="z-index:2" title="Karte l&ouml;schen">
                                             <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                        <a href="{% url 'card:card_edit' card.deck.ID card.ID %}"
-                                           class="btn btn-default" style="z-index:2" title="Karte bearbeiten">
-                                            <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                     </div>
                                 </div>
