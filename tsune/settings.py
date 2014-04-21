@@ -22,7 +22,7 @@ DATABASES = {
         'PORT': '',
         }
 }
-if 'test' in sys.argv:
+if 'test' in sys.argv or 'jenkins' in sys.argv:
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 
@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'deckglue',
+    'django_jenkins',
     'south',
     'social.apps.django_app.default',
     'memorize',
@@ -156,6 +157,11 @@ INSTALLED_APPS = (
     'cardbox',
     'markitup',
 )
+
+#Django Jenkins
+PROJECT_APPS = {
+	'cardbox',
+}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
