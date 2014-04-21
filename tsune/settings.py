@@ -1,5 +1,5 @@
 import os # for environment variables, paths, etc
-
+import sys
 # Django settings for tsune project.
 
 DEBUG = True
@@ -20,8 +20,11 @@ DATABASES = {
         'PASSWORD': 'Pa$$w0rd',
         'HOST': '',
         'PORT': '',
-    }
+        }
 }
+if 'test' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -146,6 +149,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'deckglue',
+    'south',
     'social.apps.django_app.default',
     'memorize',
     'authentication',
