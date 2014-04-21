@@ -24,3 +24,5 @@ automation/output
 
 # Build Documentation
 docs/_build
+.coverage
+coverage.xml
