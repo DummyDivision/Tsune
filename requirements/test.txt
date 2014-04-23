@@ -1,3 +1,4 @@
+-r base.txt # includes the base.txt requirements file
 lettuce==0.2.19
 splinter==0.5.4
 PyVirtualDisplay==0.1.2
