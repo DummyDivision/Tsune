@@ -12,3 +12,4 @@ python-oauth2==0.6.0
 django-markitup==2.1
 South==0.8.4
 markdown==2.4
+Unipath==1.0

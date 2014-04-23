@@ -15,6 +15,7 @@
 
 # Django files
 local_settings.py
+secrets.py
 
 # Heroku files
 staticfiles/
