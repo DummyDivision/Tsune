@@ -1,6 +1,6 @@
 # Create your views here.
 from django.contrib.auth import views
-from tsune import settings
+from django.conf import settings
 
 def login(request,**kwargs):
     response = views.login(request,kwargs.get('template_name'))
