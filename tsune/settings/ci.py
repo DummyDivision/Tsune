@@ -11,4 +11,7 @@ INSTALLED_APPS += ('django_jenkins',)
 
 PROJECT_APPS = {
     'cardbox',
+    'deckglue',
+    'memorize',
 }
+
