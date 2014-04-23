@@ -1,1 +1,1 @@
-from heroku import *
+from .heroku import *
