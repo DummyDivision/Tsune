@@ -7,7 +7,7 @@ DATABASES = {
         }
 }
 
-INSTALLED_APPS += 'django_jenkins'
+INSTALLED_APPS += ('django_jenkins',)
 
 PROJECT_APPS = {
     'cardbox',
