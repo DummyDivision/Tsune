@@ -2,7 +2,7 @@ from __future__ import division
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import TemplateView
 from cardbox.deck_views import DeckList
@@ -44,7 +44,7 @@ class PracticeCardUpdate(CardUpdate):
     """
     def get_success_url(self):
         if 'learning' in self.request.GET:
-            #Shows answers on return
+            # Shows answers on return
             return reverse('learning:learning', args=( self.kwargs.get('deck_id'),))+"?showAnswer=true"
         else:
             return super(PracticeCardUpdate,self).get_success_url()
@@ -61,7 +61,7 @@ class next_practice_item(TemplateView):
         """
         all_card_ids_for_deck = Card.objects.filter(deck=kwargs.get('deck_id')).values_list("ID", flat=True)
 
-        #Force mode activation. TODO: Let the user actually choose it somewhere.
+        # Force mode activation. TODO: Let the user actually choose it somewhere.
         kwargs['force'] = False
         if kwargs['force']:
             all_practice_for_this_deck = Practice.objects.filter(user=self.request.user, object_id__in=all_card_ids_for_deck).order_by('ended_last_viewing')
@@ -106,7 +106,7 @@ def process_rating(request):
         elif rating >= 0 and rating <= 4:
             practice_item.set_next_practice(rating)
     else:
-        #Updating times practiced since it normally gets updated in set_next_practice
+        # Updating times practiced since it normally gets updated in set_next_practice
         practice_item.times_practiced += 1
     practice_item.ended_last_viewing = datetime.datetime.utcnow().replace(tzinfo=utc)
     practice_item.save()
