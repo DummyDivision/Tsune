@@ -10,14 +10,11 @@ from django.http import HttpRequest
 
 from django.test import TestCase
 from guardian.models import User
-import markitup
-from markitup.fields import MarkupField
-from nose.tools import assert_equals, ok_
+from nose.tools import assert_equals
 from cardbox.card_model import Card
-from cardbox.deck_forms import DeckForm
 from cardbox.deck_model import Deck
 from guardian.shortcuts import assign_perm
-from cardbox.deck_views import DeckList, DeckCreate
+from cardbox.deck_views import DeckList
 
 
 class CardModelTests(TestCase):
