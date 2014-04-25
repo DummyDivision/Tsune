@@ -12,6 +12,8 @@ from datetime import datetime, timedelta
 from django.utils.timezone import utc
 from django.db import models
 
+
+
 @receiver(post_save, sender=UserObjectPermission)
 def create_practice_objects_for_new_viewers(sender, **kwargs):
     if kwargs['instance'].permission_id == Permission.objects.get(codename="view_deck").id:
@@ -74,9 +76,11 @@ class DelayablePractice(Practice):
         if all_due_cards_in_deck.count() is 0:
             return
         latest_due_practice = all_due_cards_in_deck.aggregate(Max('next_practice'))['next_practice__max']
-        if (latest_due_practice-now).min < timedelta(minutes=10):
-            self.next_practice = latest_due_practice + timedelta(milliseconds=1)
+
+        #Pushed to end if end < 10 min
+        if (now-latest_due_practice) < timedelta(minutes=10):
+            self.next_practice = latest_due_practice + timedelta(milliseconds=1) # 1 ms since 10 min would undue
         else:
-            self.next_practice = now + timedelta(minutes=10)
+            self.next_practice = now + timedelta(minutes=10) # Now in ten minutes, I want to see that card again
 
 
