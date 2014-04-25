@@ -10,9 +10,7 @@ from django.test import TestCase
 from guardian.models import User
 from nose.tools import assert_equals
 from cardbox.card_model import Card
-from cardbox.deck_model import Deck
 from deckglue.models import DelayablePractice
-from memorize.models import Practice
 
 
 
@@ -48,8 +46,8 @@ class SignalTests(TestCase):
         """Check If Practice objects get deleted via signal when user is deleted"""
         user = User.objects.get(username="zirror")
         user.delete()
-        all = DelayablePractice.objects.all()
-        assert_equals(all.count(), 0)
+        allDps = DelayablePractice.objects.all()
+        assert_equals(allDps.count(), 0)
 
 class DelayablePracticeTest(TestCase):
     """
@@ -82,7 +80,6 @@ class DelayablePracticeTest(TestCase):
 
     def test_delay_nothing_if_no_cards_are_due(self):
         """Check If nothing gets delayed when no cards are left due"""
-        user = User.objects.get(username="zirror")
         dp_1 = self.delayCard(1) # make not due
         dp_2 = self.delayCard(2) # make not due
         time_1 = dp_1.next_practice
@@ -103,7 +100,7 @@ class DelayablePracticeTest(TestCase):
 
     def test_delay_for_10_min(self):
         """Card gets delayed for 10 minutes, if """
-        dp_1 = self.makeCardDue(1,20) # make very due
+        self.makeCardDue(1,20) # make very due
         dp_2 = self.makeCardDue(2,25) # make due, but not as due
         dp_2.delay()
         assert_equals(dp_2.next_practice > datetime.utcnow().replace(tzinfo=utc),True)

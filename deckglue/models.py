@@ -3,14 +3,12 @@ from django.db.models.aggregates import Max
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from cardbox.card_model import Card
-from cardbox.deck_model import Deck
 from guardian.shortcuts import assign_perm, get_users_with_perms
 from guardian.models    import UserObjectPermission
 from memorize.models import Practice
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.utils.timezone import utc
-from django.db import models
 
 
 
@@ -72,12 +70,12 @@ class DelayablePractice(Practice):
         now = datetime.utcnow().replace(tzinfo=utc)
         all_due_cards_in_deck = self.get_all_due_in_card_id_list(self.user, Card.objects.filter(deck=self.item.deck))
 
-        #Don't delay if no cards left are due
+        # Don't delay if no cards left are due
         if all_due_cards_in_deck.count() is 0:
             return
         latest_due_practice = all_due_cards_in_deck.aggregate(Max('next_practice'))['next_practice__max']
 
-        #Pushed to end if end < 10 min
+        # Pushed to end if end < 10 min
         if (now-latest_due_practice) < timedelta(minutes=10):
             self.next_practice = latest_due_practice + timedelta(milliseconds=1) # 1 ms since 10 min would undue
         else:
