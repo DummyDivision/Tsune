@@ -1,6 +1,6 @@
 from .base import *
 
-SOUTH_TESTS_MIGRATE=False
+#SOUTH_TESTS_MIGRATE=False
 
 DATABASES = {
     'default': {
