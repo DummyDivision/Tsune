@@ -8,3 +8,5 @@ install:
   - "pip install -r requirements/unittests.txt"
 # command to run tests
 script: python manage.py jenkins --settings=tsune.settings.ci --verbosity 2
+after_success:
+  - coveralls
