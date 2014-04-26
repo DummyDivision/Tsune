@@ -8,6 +8,8 @@ install:
   - "pip install -r requirements/ci.txt"
   - "pip install -r requirements/unittests.txt"
 # command to run tests
-script: python manage.py jenkins --settings=tsune.settings.ci --verbosity 2
+script:
+  - python manage.py jenkins --settings=tsune.settings.ci --verbosity 2
+  - coverage run --source=cardbox,deckglue,memorize manage.py test cardbox deckglue memorize --settings=tsune.settings.ci
 after_success:
   coveralls
