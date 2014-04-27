@@ -14,7 +14,7 @@ from nose.tools import assert_equals
 from cardbox.card_model import Card
 from cardbox.deck_model import Deck
 from deckglue.models import DelayablePractice
-from deckglue.views import PracticeDeckList
+from deckglue.views import PracticeDeckList, next_practice_item
 
 
 def delayCard(dpid):
@@ -86,6 +86,53 @@ class PracticeDeckListTest(TestCase):
         lod = dl.get_queryset()
 
         assert_equals(lod[0].due_percentage,100)
+
+class NextPracticeTemplateTest(TestCase):
+    """
+    Next Practice Template Text Suite
+    """
+    fixtures = ['test.json']
+
+
+    def getNextPracticeTemplate(self):
+        npi = next_practice_item()
+        npi.template_name = "learning/learn_item.html"
+        npi.request = HttpRequest()
+        npi.request.user = User.objects.get(username="zirror")
+        return npi
+
+    def test_get_cards_when_cards_due(self):
+        """Returns response for learning when cards are due"""
+        npi = npi = self.getNextPracticeTemplate()
+
+        makeCardDue(1,10)
+        itms = npi.get(npi.request,deck_id=1)
+        text = str(itms.render())
+
+        assert_equals("learning" in text, True)
+
+    def test_get_cards_when_force(self):
+        """Returns no carsds left for learning when none are due"""
+        npi = self.getNextPracticeTemplate()
+
+        delayCard(1)
+        delayCard(2)
+        itms = npi.get(npi.request,deck_id=1)
+
+        assert_equals("Herzlichen" in str(itms), True)
+
+    def test_get_cards_when_force(self):
+        """Returns response for learning when force mode but no cards"""
+        npi = self.getNextPracticeTemplate()
+
+        delayCard(1)
+        delayCard(2)
+        itms = npi.get(npi.request,deck_id=1,force=True)
+        text = str(itms.render())
+
+        assert_equals("learning" in text, True)
+
+
 
 class SignalTests(TestCase):
     """
