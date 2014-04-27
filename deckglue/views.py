@@ -60,9 +60,9 @@ class next_practice_item(TemplateView):
 
         """
         all_card_ids_for_deck = Card.objects.filter(deck=kwargs.get('deck_id')).values_list("ID", flat=True)
-
         # Force mode activation. TODO: Let the user actually choose it somewhere.
-        kwargs['force'] = False
+        if not 'force' in kwargs:
+            kwargs['force'] = False
         if kwargs['force']:
             all_practice_for_this_deck = Practice.objects.filter(user=self.request.user, object_id__in=all_card_ids_for_deck).order_by('ended_last_viewing')
         else:
