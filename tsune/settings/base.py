@@ -63,6 +63,12 @@ INSTALLED_APPS = (
 # Django sites configuration
 SITE_ID = 1
 
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    PROJECT_DIR.child('static'),
+)
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (

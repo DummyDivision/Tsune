@@ -8,8 +8,3 @@ DATABASES['default'] =  dj_database_url.config()
 
 # Static asset configuration
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    PROJECT_DIR.child('static'),
-)
