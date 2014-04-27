@@ -19,9 +19,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^cardbox/', include('deckglue.deckurls', namespace="deck")),
     url(r'^user/', include('authentication.urls')),
-   # url(r'^cardbox/', include('cardbox.deck_urls', namespace="deck")),
     url(r'^learning/', include('deckglue.learningurls', namespace="learning")),
-    #url(r'^cardbox/cards/', include('cardbox.card_urls', namespace="card")),
     url(r'^cardbox/cards/', include('deckglue.cardurls', namespace="card")),
     url(r'^markitup/', include('markitup.urls'))
 )
