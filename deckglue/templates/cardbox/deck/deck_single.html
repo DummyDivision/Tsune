@@ -1,62 +1,69 @@
 {% load l10n %}
-<div class="thumbnail cardstack" style="padding: 0; position:relative">
-                        <a href="{% url 'deck:deck_detail' deck.ID%}"><span
-                                class="clickWholeDiv"></span></a>
-                        <div class="caption">
-                            <h2 class="wordwrap">{{ deck.title }} </h2>
+<div class="thumbnail cardstack deckeffect" style="padding: 0; position:relative">
+    <a href="{% url 'card:card_list' deck.ID%}"><span
+            class="clickWholeDiv"></span></a>
+    <div class="caption">
+        <h2 class="wordwrap" style="position:relative; z-index: 2" title="{{ deck.title }}">{{ deck.title|truncatechars:10 }} </h2>
 
-                            <p class="wordwrap">{{ deck.description }}</p>
+        <p class="wordwrap" style="position:relative; z-index: 2; min-height:4.5em " title="{{ deck.description }}">{{ deck.description|truncatechars:80 }}</p>
 
-                            <div class="row" style="text-align:center">
-                                <div class="col-md-12">
-                                    <a class="btn btn-primary" style="position:relative; z-index: 2"
-                                       href="{% url 'learning:learning' deck.ID %}">Lernen</a>
-                                    <a class="btn btn-primary" style="position:relative; z-index: 2"
-                                       href="{% url 'card:card_list' deck.ID %}">Karten anzeigen</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="text-align: left">
-                            <div class="progress">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-warning" style="width: {{ deck.due_percentage|unlocalize }}%">
-                                        <span class="sr-only">20% Complete (warning)</span>
-                                    </div>
-                                    <div class="progress-bar progress-bar-success" style="width: {{ deck.not_due|unlocalize }}%">
-                                        <span class="sr-only">35% Complete (success)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <b>PRIVATE</b><br>
-                                    <small>SHARED</small>
-                                </div>
-                                <div class="col-md-4">
-                                    <b>{{ deck.due_cards }}</b><br>
-                                    <small>DUE</small>
-                                </div>
-                                <div class="col-md-4">
-                                    <b>{{ deck.get_total_cards }}</b><br>
-                                    <small>TOTAL</small>
-                                </div>
-                            </div>
-                            <p></p>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <b>BY:</b>
-                                </div>
-                                <div class="col-md-8">
-                                    <small><a style="z-index: 2" href="#">YOURSELF</a></small>
-                                </div>
-                            </div>
-                            <p></p>
-
-                            <div class="row" style="text-align: center;">
-                                <div class="col-md-12">
-                                    {% include "cardbox/deck/deck_single_buttons.html" %}
-                                </div>
-                            </div>
-                        </div>
+        <div class="row" style="text-align:center">
+            <div class="col-md-12">
+                <a class="btn btn-primary" style="position:relative; z-index: 2"
+                   href="{% url 'learning:learning' deck.ID %}">Lernen</a>
+                <a class="btn btn-primary" style="position:relative; z-index: 2"
+                   href="{% url 'card:card_list' deck.ID %}">Karten anzeigen</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="text-align: left">
+    <p class="text-center">
+        <a  data-toggle="collapse" style="position:relative; z-index:2" data-parent="#accordion" href="#collapse{{ deck.ID }}">
+            Show/Hide Details
+        </a>
+        </p>
+        <div id="collapse{{ deck.ID }}" class="panel-collapse collapse">
+            <div class="progress">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: {{ deck.due_percentage|unlocalize }}%">
+                        <span class="sr-only">20% Complete (warning)</span>
                     </div>
+                    <div class="progress-bar progress-bar-success" style="width: {{ deck.not_due|unlocalize }}%">
+                        <span class="sr-only">35% Complete (success)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <b>PRIVATE</b><br>
+                    <small>SHARED</small>
+                </div>
+                <div class="col-md-4">
+                    <b>{{ deck.due_cards }}</b><br>
+                    <small>DUE</small>
+                </div>
+                <div class="col-md-4">
+                    <b>{{ deck.get_total_cards }}</b><br>
+                    <small>TOTAL</small>
+                </div>
+            </div>
+            <p></p>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <b>BY:</b>
+                </div>
+                <div class="col-md-8">
+                    <small><a style="z-index: 2" href="#">YOURSELF</a></small>
+                </div>
+            </div>
+            <p></p>
+
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12">
+                    {% include "cardbox/deck/deck_single_buttons.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

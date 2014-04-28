@@ -1,11 +1,87 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block nav %}{% endblock %} {# show no nav on landing page #}
+
 {% block head %}
-    <link rel="stylesheet" href="{% static "authentication/login.css" %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 {% endblock %}
 
-{% block content %}
+{% block body %}
+
+<div id="headerwrap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-offset-3 col-lg-6">
+                    <img src="{% static "images/Interrim_Tsune_Logo.png" %}" width = "300" alt="Tsune Logo"/>
+                    <h1>Tsune</h1>
+					<h2>A flashcard learning community.</h2>
+				</div><!-- /col-lg-6 -->
+
+			</div><!-- /row -->
+		</div><!-- /container -->
+  {% if secrets_present %}
+           <div class="row">{% include "authentication/social_login.html" %}</div>
+                {% else %}
+           <div class="row"><div class="col-md-12"><a href="{% url 'social:begin' 'google-oauth' %}"><img src="{% static "images/Red-signin-Long-base_44dp.png" %}"/></a></div></div>
+           {% endif %}
+	</div><!-- /headerwrap -->
+
+
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>Create flashcards and memorize everything.</h1>
+				<h2>You can create and share flashcards easily. Flashcards are a time honored method of learning through repetition.</h2>
+            </div>
+		</div><!-- /row -->
+		<div class="row mt centered">
+			<div class="col-lg-4">
+				<img src="http://placehold.it/180x180" width="180" alt="">
+				<h4>Step 1 - Sign in</h4>
+				<p>It's free! You can use either a Google or Facebook account to sign in. No need to remember a password. Any information acquired is only used for identification purposes. We never send you spam!</p>
+			</div><!--/col-lg-4 -->
+
+			<div class="col-lg-4">
+				<img src="http://placehold.it/180x180" width="180" alt="">
+				<h4>Step 2 - Start learning</h4>
+				<p>Using our intuitive interface you can easily create flashcards and start learning immediately. Invite your friends and collaborate on cards and deck of cards.</p>
+
+			</div><!--/col-lg-4 -->
+
+			<div class="col-lg-4">
+				<img src="http://placehold.it/180x180   " width="180" alt="">
+				<h4>Step 3 - Stay motivated</h4>
+				<p>By using an innovative system of achievements and high scores, you will stay motivated throughout the entire time you are using Tsune.</p>
+
+			</div><!--/col-lg-4 -->
+		</div><!-- /row -->
+	</div><!-- /container -->
+
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1>Tsune is for everyone.</h1>
+				<h3>Be it in high school, college or on the job, sometimes you have to learn things by heart. Tsune can help you achieve that in a fun way.</h3>
+			</div>
+		</div><!-- /row -->
+    </div>
+
+
+
+	<div class="container">
+
+		<hr>
+		<p class="centered">About Contact News Documentation<br> Theme by BlackTie.co - Attribution License 3.0 - 2013</p>
+	</div>
+{% endblock %}
+
+{% comment %}{% block content %}
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             {% if form.errors %}
@@ -49,4 +125,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock %}{% endcomment %}

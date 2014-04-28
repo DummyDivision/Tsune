@@ -1,7 +1,36 @@
 /* Make something awesome! */
 
 .cardstack {
-    border: 3px solid rgb(18, 46, 83);
+    margin-top:30px;
+}
+
+
+
+.deckeffect{
+    -webkit-box-shadow:
+        1px 1px   0 rgba(0,   0,   0,   0.100),
+        3px 3px   0 rgba(255, 255, 255, 1.0),
+        4px 4px   0 rgba(0,   0,   0,   0.125),
+        6px 6px   0 rgba(255, 255, 255, 1.0),
+        7px 7px   0 rgba(0,   0,   0,   0.150),
+        9px 9px   0 rgba(255, 255, 255, 1.0),
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+  -moz-box-shadow:
+        1px 1px   0 rgba(0,   0,   0,   0.100),
+        3px 3px   0 rgba(255, 255, 255, 1.0),
+        4px 4px   0 rgba(0,   0,   0,   0.125),
+        6px 6px   0 rgba(255, 255, 255, 1.0),
+        7px 7px   0 rgba(0,   0,   0,   0.150),
+        9px 9px   0 rgba(255, 255, 255, 1.0),
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+  box-shadow:
+        1px 1px   0 rgba(0,   0,   0,   0.100),
+        3px 3px   0 rgba(255, 255, 255, 1.0),
+        4px 4px   0 rgba(0,   0,   0,   0.125),
+        6px 6px   0 rgba(255, 255, 255, 1.0),
+        7px 7px   0 rgba(0,   0,   0,   0.150),
+        9px 9px   0 rgba(255, 255, 255, 1.0),
+        10px 10px 0 rgba(0,   0,   0,   0.175);
 }
 
 span.clickWholeDiv {
@@ -19,17 +48,14 @@ span.clickWholeDiv {
     background-image: url('empty.gif');
 }
 
-.cardstack:hover {
-    border: 3px solid #d0d0d0;
+.hovereffect:hover {
+    border: 2px solid #d0d0d0;
 }
 
 .card-overview {
     border: 3px solid rgb(18, 46, 83);
 }
 
-.card-overview:hover {
-    border: 3px solid #d0d0d0;
-}
 
 .wordwrap{
     word-wrap: break-word;
@@ -37,4 +63,8 @@ span.clickWholeDiv {
 .card-h2 {
     font-size: 40px;
     font-weight: bold;
+}
+
+.learning {
+    background-color: #eee;
 }

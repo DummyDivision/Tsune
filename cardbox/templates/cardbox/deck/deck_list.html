@@ -1,36 +1,30 @@
 {% extends "cardbox/base.html" %}
 {% load guardian_tags %}
-{% block title %}Tsune - Kartenliste{% endblock %}
+{% block title %}Tsune - Decks{% endblock %}
 {% block content %}
     {% include "cardbox/deck/deck_delete_popup.html" %}
     <div class="row cardstacks" style="margin-top:-15px;">
+
         {% if object_list %}
             {% for deck in object_list %}
                 {% get_obj_perms user for deck as "deck_perms" %}
-                <div class="col-md-3">
+                <div class="col-sm-12 col-md-4 col-lg-3 clearfix">
                 {% include "cardbox/deck/deck_single.html" %}
                 </div>
-
+                {% if forloop.counter|divisibleby:3 %}
+                <div class="clearfix visible-md"></div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:4 %}
+                <div class="clearfix visible-lg"></div>
+                {% endif %}
                 {% if forloop.last %}
-                    {% if forloop.counter|divisibleby:"4" %}
+                       {% include "cardbox/deck/deck_newdeckdiv.html" %}
                         </div>
-                        <div class="row" style="margin-top: 20px">
-                            {% include "cardbox/deck/deck_newdeckdiv.html" %}
-                        </div>
-                    {% else %}
-                        {% include "cardbox/deck/deck_newdeckdiv.html" %}
-                    {% endif %}
-                {% else %}
-                    {% if forloop.counter|divisibleby:"4" %}
-                        </div>
-                        <div class="row" style="margin-top: 20px">
-                    {% endif %}
                 {% endif %}
             {% endfor %}
-        {% else %}
-            <div class="row">
-                {% include "cardbox/deck/deck_newdeckdiv.html" %}
-            </div>
+         {% else %}
+            {% include "cardbox/deck/deck_newdeckdiv.html" %}
+                        </div>
         {% endif %}
         </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 <div class="btn-group">
-                                        {% if "add_deck" in deck_perms %}
+
+                                        {% if "view_deck" in deck_perms %}
                                         <a href="{% url 'card:card_new' deck.ID %}"
                                            class="btn btn-default" style="z-index:2" title="Karte hinzuf&uuml;gen">
                                             <span class="glyphicon glyphicon-plus-sign"></span>

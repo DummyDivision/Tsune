@@ -1,11 +1,14 @@
-         <div class="jumbotron" style="height:50px; padding:1px; text-align: center">
+        <div class="row" style="text-align:center; margin-top:50px; background-color: #eeeeee; padding:10px;">
+                <div class="col-md-4">
+                    <a class="btn btn-primary"
+                            style="text-align:center; width:10em"
+                            href="{% url 'card:card_list' object.deck.ID %}">Zur&uuml;ck</a></div>
+                <div class="col-md-4">
                         <a class="btn btn-primary"
-                            style="text-align:center; width:10em"
-                            href="{% url 'card:card_list' object.deck.ID %}">Zur&uuml;ck</a>
-                        <a class="btn btn-primary col-md-offset-3"
                            onclick="show_delete_popup('{% url 'card:card_delete' object.deck.ID object.ID %}')"
-                           style="text-align:center; width:10em">L&ouml;schen</a>
-                        <a class="btn btn-primary col-md-offset-3"
+                           style="text-align:center; width:10em">L&ouml;schen</a></div>
+               <div class="col-md-4">        <a class="btn btn-primary col-md-offset-3"
                             style="text-align:center; width:10em"
-                            href="{% url 'card:card_edit' object.deck.ID object.ID %}">Bearbeiten</a>
+                            href="{% url 'card:card_edit' object.deck.ID object.ID %}">Bearbeiten</a></div>
+            </div>
          </div>

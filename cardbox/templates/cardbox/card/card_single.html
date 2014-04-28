@@ -1,0 +1,28 @@
+<div class="col-sm-12 col-md-4 col-lg-3 clearfix wordwrap">
+                    <div class="panel card-overview panel-default cardstack" style="position:relative">
+                        <a href="{% url 'card:card_detail' card.deck.ID card.ID %}"><span
+                                class="clickWholeDiv"></span></a>
+
+                        <div class="panel-heading">
+                            <b>{{ card.front.raw }}</b>
+                        </div>
+                        <div class="panel-body">{{ card.back.raw }}</div>
+                        <div class="panel-footer">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-md-12">
+                                    <div class="btn-group">
+                                        <a href="{% url 'card:card_edit' card.deck.ID card.ID %}"
+                                           class="btn btn-default" style="z-index:2" title="Karte bearbeiten">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        <a
+                                                onclick="show_delete_popup('{% url 'card:card_delete' card.deck.ID card.ID %}')"
+                                                class="btn btn-default" style="z-index:2" title="Karte l&ouml;schen">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>

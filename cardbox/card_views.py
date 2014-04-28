@@ -55,7 +55,7 @@ class CardUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CardUpdate, self).get_context_data(**kwargs)
         context['action'] = "bearbeiten"
-        context['button_text'] = "Änderungen Übernehmen"
+        context['button_text'] = "Übernehmen"
         context['deck_id'] = self.kwargs.get('deck_id')
         return context
 

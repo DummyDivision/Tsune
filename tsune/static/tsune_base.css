@@ -1,5 +1,13 @@
 body{
  
- background-color: rgb(18,46,83);
+ background-color: #3498db;
  
+}
+
+html {
+    overflow-y: scroll;
+}
+
+.white-backgrd{
+   background-color: #FFFFFF;
 }

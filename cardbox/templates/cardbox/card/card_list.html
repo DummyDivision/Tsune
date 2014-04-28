@@ -6,55 +6,15 @@
     {% if object_list %}
         <div class="row">
             {% for card in object_list %}
-                <div class="col-md-3 wordwrap">
-                    <div class="panel card-overview panel-default" style="position:relative">
-                        <a href="{% url 'card:card_detail' card.deck.ID card.ID %}"><span
-                                class="clickWholeDiv"></span></a>
-
-                        <div class="panel-heading">
-                            <b>{{ card.front }}</b>
-                        </div>
-                        <div class="panel-body">{{ card.back }}</div>
-                        <div class="panel-footer">
-                            <div class="row" style="text-align: center;">
-                                <div class="col-md-12">
-                                    <div class="btn-group">
-                                        <a href="{% url 'card:card_edit' card.deck.ID card.ID %}"
-                                           class="btn btn-default" style="z-index:2" title="Karte bearbeiten">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                        <a
-                                                onclick="show_delete_popup('{% url 'card:card_delete' card.deck.ID card.ID %}')"
-                                                class="btn btn-default" style="z-index:2" title="Karte l&ouml;schen">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% if forloop.last %}
-                    {% if forloop.counter|divisibleby:"4" %}
-                        </div>
-                        <div class="row">
-                            {% include "cardbox/card/card_newcarddiv.html" %}
-                        </div>
-                    {% else %}
-                        {% include "cardbox/card/card_newcarddiv.html" %}
-                    {% endif %}
-                {% else %}
-                    {% if forloop.counter|divisibleby:"4" %}
-                        </div>
-                        <div class="row">
-                    {% endif %}
+            {% include "cardbox/card/card_single.html" %}
+                {% if forloop.counter|divisibleby:3 %}
+                    <div class="clearfix visible-md"></div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:4 %}
+                    <div class="clearfix visible-lg"></div>
                 {% endif %}
             {% endfor %}
-        </div>
-    {% else %}
-        <div class="row">
+    {% endif %}
             {% include "cardbox/card/card_newcarddiv.html" %}
         </div>
-    {% endif %}
 {% endblock %}

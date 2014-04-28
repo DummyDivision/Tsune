@@ -100,6 +100,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
+    "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     "social.apps.django_app.context_processors.backends",
     "social.apps.django_app.context_processors.login_redirect"
@@ -192,7 +193,7 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_SET = 'markitup/sets/markdown'
-MARKITUP_SKIN = 'markitup/skins/markitup'
+MARKITUP_SKIN = 'markituptsu'
 
 # Fancy logic to generate or load SECRET_KEY
 if try_env_variable("SECRET_KEY") is None:
