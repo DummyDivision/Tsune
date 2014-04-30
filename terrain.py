@@ -5,21 +5,25 @@ from lettuce import before, after, world
 from logging import getLogger
 from pyvirtualdisplay import Display
 from splinter import Browser
+from guardian.models import User
 
 logger = getLogger(__name__)
 logger.info("Loading the terrain file...")
+logger.info("Loading functions and variables for world...")
+
+def user_present(username):
+    """ Checks the database if a user for a given username exists.
+    """
+    if User.objects.filter(username=username).count():
+        return True
+    return False
+world.user_present = user_present
 
 @before.runserver
 def setup_database(actual_server):
-    """    This will setup your database, sync it, and run migrations if you are using South.
-    It does this before the Test Django server is set up.
-    """
-    logger.info("Setting up a test database...")
-
     world.test_runner = DjangoTestSuiteRunner(interactive=False)
     DjangoTestSuiteRunner.setup_test_environment(world.test_runner)
     world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
-
     call_command('syncdb', interactive=False, verbosity=0)
     call_command('loaddata', 'LettuceFixtures.json', verbosity=0)
 

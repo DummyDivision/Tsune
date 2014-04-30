@@ -19,8 +19,8 @@ def enter_username_and_password(step, username, password):
 
 @step(u'"([^"]*)" is the name of a registered user')
 def is_the_name_of_registered_user(step, username):
-    # Check the db.
-    assert False, 'This step must be implemented'
+    user_present = world.user_present(username=username)
+    assert user_present, 'The user ' + username + 'does not exist.'
 
 @step(u'user password is set to "([^"]*)"')
 def password_is_set_to(step, password):
