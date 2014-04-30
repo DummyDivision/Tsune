@@ -199,7 +199,11 @@ MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markituptsu'
 
+
+# InPlaceEdit Settings
 INPLACEEDIT_EVENT = "click"
+
+ADAPTOR_INPLACEEDIT={'markitup':'profiles.fields.AdaptorMarkItUp'}
 
 # Fancy logic to generate or load SECRET_KEY
 if try_env_variable("SECRET_KEY") is None:
