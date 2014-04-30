@@ -1,25 +1,8 @@
-from lettuce import step,world,before,after
-from pyvirtualdisplay import Display
-from splinter import Browser
+from lettuce import step,world
 
-@before.all
-def start_browser():
-    # Prepare webdriver and virtual display for headless browser.
-    print "Prepare virtual display..."
-    world.display = Display(visible=0, size=(800, 600))
-    world.display.start()
-    print "Fire up headless browser..."
-    world.browser = Browser()
-
-    # django_url cannot be used to refer to tsune_root as django
-    # integration is faulty in current lettuce.
-    world.tsune_root = 'http://127.0.0.1:8000'
-
-@after.all
-def quit_browser(total):
-    print "Gracefully quit headless browser..."
-    world.browser.quit()
-    world.display.stop()
+# django_url cannot be used to refer to tsune_root as django
+# integration is faulty in current lettuce.
+world.tsune_root = 'http://127.0.0.1:8000'
 
 # User and login related steps.
 @step (u'I am on (.*)')
