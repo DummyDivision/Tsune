@@ -25,6 +25,7 @@ def setup_database(actual_server):
     DjangoTestSuiteRunner.setup_test_environment(world.test_runner)
     world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
     call_command('syncdb', interactive=False, verbosity=0)
+    call_command('migrate', verbosity=0)
     call_command('loaddata', 'LettuceFixtures.json', verbosity=0)
 
 @after.runserver

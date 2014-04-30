@@ -1,4 +1,4 @@
-from .base import *
+from .ci import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

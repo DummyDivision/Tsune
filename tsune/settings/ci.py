@@ -7,7 +7,10 @@ DATABASES = {
         }
 }
 
-INSTALLED_APPS += ('django_jenkins',)
+INSTALLED_APPS += (
+    'django_jenkins',
+    'lettuce.django'
+)
 
 PROJECT_APPS = {
     'cardbox',
