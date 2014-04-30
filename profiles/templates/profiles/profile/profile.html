@@ -1,11 +1,28 @@
-<h1>User Profile</h1>
-<table>
-    <tr>
-        <td>Nickname:</td>
-        <td>{{ object.nickname }}</td>
-    </tr>
-    <tr>
-        <td>E-Mail:</td>
-        <td>{{ object.user.email }}</td>
-    </tr>
-</table>
+{% extends "base.html" %}
+{% load inplace_edit %}
+{% block head %}
+{% inplace_static %}
+{% endblock %}
+{% block content %}
+    <div style="background: white">
+        <h1>User Profile</h1>
+        <table>
+            <tr>
+                <td>Nickname:</td>
+                <td>{% inplace_edit "object.nickname" %}</td>
+            </tr>
+            <tr>
+                <td>E-Mail:</td>
+                <td>{{ object.user.email }}</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td>{% inplace_edit "object.description" %}</td>
+            </tr>
+            <tr>
+                <td>Bild-URL:</td>
+                <td>{% inplace_edit "object.image_url" %}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

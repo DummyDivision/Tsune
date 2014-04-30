@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'cardbox',
     'markitup',
     'profiles',
+    'inplaceeditform',
 )
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
@@ -106,7 +107,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     "social.apps.django_app.context_processors.backends",
-    "social.apps.django_app.context_processors.login_redirect"
+    "social.apps.django_app.context_processors.login_redirect",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -197,6 +198,8 @@ MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markituptsu'
+
+INPLACEEDIT_EVENT = "click"
 
 # Fancy logic to generate or load SECRET_KEY
 if try_env_variable("SECRET_KEY") is None:
