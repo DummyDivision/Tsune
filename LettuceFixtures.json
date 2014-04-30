@@ -1,0 +1,18 @@
+[{
+    "pk": 2,
+    "model": "auth.user",
+    "fields": {
+        "username": "testuser",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2014-04-30T09:22:34.577Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$10000$CPdE62MRMpct$ee3yeyy6Aydh4karbi+4QjjvYnGxSRkRsJBKR/n+0Gw=",
+        "email": "",
+        "date_joined": "2014-04-30T09:22:34.577Z"
+    }
+}]
