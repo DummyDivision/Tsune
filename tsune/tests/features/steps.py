@@ -1,14 +1,11 @@
+from lettuce.django import django_url
 from lettuce import step,world
-
-# django_url cannot be used to refer to tsune_root as django
-# integration is faulty in current lettuce.
-world.tsune_root = 'http://127.0.0.1:8000'
 
 # User and login related steps.
 @step (u'I am on (.*)')
 def am_on_page(step, page):
     if page == "the main page":
-        expected_url = world.tsune_root + '/cardbox/'
+        expected_url = django_url('/cardbox/')
     else:
         expected_url = page
     assert world.browser.url == expected_url, 'The url seems to be wrong.'
@@ -105,7 +102,7 @@ def go_to_page(step, page):
         url = '/user/login/'
     else:
         url = page
-    world.response = world.browser.visit(world.tsune_root + url)
+    world.response = world.browser.visit(django_url(url))
 
 @step(u'I see the deck "([^"]*)" in my portfolio')
 def see_deck_in_portfolio(step, deck):
