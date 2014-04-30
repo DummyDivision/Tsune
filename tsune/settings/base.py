@@ -58,7 +58,10 @@ INSTALLED_APPS = (
     'authentication',
     'cardbox',
     'markitup',
+    'profiles',
 )
+
+AUTH_PROFILE_MODULE = 'profiles.UserProfile'
 
 # Django sites configuration
 SITE_ID = 1
