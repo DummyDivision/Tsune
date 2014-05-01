@@ -10,4 +10,4 @@ class Profile(models.Model):
     # Other fields here
     nickname = models.CharField(max_length=20)
     description = MarkupField()
-    image_url = models.URLField()
+    image_url = models.URLField(max_length=300)

@@ -12,12 +12,10 @@ class AdaptorMarkItUp(AdaptorTextAreaField):
 
     def save(self, value):
         super(AdaptorMarkItUp,self).save(value)
-        print value
 
     def render_value_edit(self,template_name="profiles/profile/markdown.html"):
         field_name = self.field_name_render
         value = super(AdaptorMarkItUp, self).render_value(field_name)
-        print value.rendered
         context = {
             'rendered':value.rendered
         }
