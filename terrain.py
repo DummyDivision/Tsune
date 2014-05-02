@@ -29,7 +29,8 @@ world.user_present = user_present
 
 # Maps the page names to the actual urls.
 world.page_map = {"the login page": "/user/login/",
-                  "the main page": "/cardbox/"}
+                  "the main page":  "/cardbox/",
+                  "my portfolio":   "/cardbox/"}
 
 @before.runserver
 def setup_database(actual_server):

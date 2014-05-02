@@ -1,20 +1,12 @@
 from lettuce.django import django_url
 from lettuce import step,world
 
-# User and login related steps.
-@step (u'I am on (.*)')
-def am_on_page(step, page):
-    expected_url = ""
+# Steps first appearing in feature "Sign in"
+@step(u'I go to (.*)')
+def go_to_page(step, page):
     if page in world.page_map.keys():
-        expected_url = world.page_map[page]
-    assert world.browser.url == django_url(expected_url), 'The url seems to be wrong.'
-
-@step(u'I enter "([^"]*)" and "([^"]*)"')
-def enter_username_and_password(step, username, password):
-    # Web driver: fill in data and hit enter.
-    world.browser.fill("username", username)
-    world.browser.fill("password", password)
-    world.browser.find_by_value('login').click()
+        url = world.page_map[page]
+        world.response = world.browser.visit(django_url(url))
 
 @step(u'"([^"]*)" is the name of a registered user')
 def is_the_name_of_registered_user(step, username):
@@ -25,11 +17,20 @@ def is_the_name_of_registered_user(step, username):
 def password_is_set_to(step, password):
     # Check db.
     assert False, 'This step must be implemented'
-    	
-@step(u'user password is wrong')
-def password_is_wrong(step):
-    # Check db.
-    assert False, 'This step must be implemented'
+
+@step(u'I enter "([^"]*)" and "([^"]*)"')
+def enter_username_and_password(step, username, password):
+    # Web driver: fill in data and hit enter.
+    world.browser.fill("username", username)
+    world.browser.fill("password", password)
+    world.browser.find_by_value('login').click()
+
+@step (u'I am on (.*)')
+def am_on_page(step, page):
+    expected_url = ""
+    if page in world.page_map.keys():
+        expected_url = world.page_map[page]
+    assert world.browser.url == django_url(expected_url), 'The url seems to be wrong.'
 
 @step(u'I see the message "([^"]*)"')
 def see_message(step, message):
@@ -41,9 +42,29 @@ def user_is_not_registered(step, username):
     # Check db.
     assert False, 'This step must be implemented'
 
-# create card
+@step(u'user password is wrong')
+def password_is_wrong(step):
+    # Check db.
+    assert False, 'This step must be implemented'
+
+# Steps first appearing in scenario Create Deck"
 @step(u'I am logged in')
 def am_logged_in(step):
+    assert False, "this step must be implemented"
+
+@step(u'the card "([^"]*)" does not exist in the deck "([^"]*)"')
+def card_doesnt_exist_in_deck(step, card, deck):
+     # Check db.
+    assert False, "this step must be implemented"
+
+@step(u'I create the deck "([^"]*)"')
+def create_deck(step, deck):
+     # Check db.
+    assert False, "this step must be implemented"
+
+@step(u'I see the deck "([^"]*)" in my portfolio')
+def see_deck_in_portfolio(step, deck):
+    # Web driver.
     assert False, "this step must be implemented"
 
 @step(u'the deck "([^"]*)"( already)? exists in my portfolio')
@@ -54,12 +75,6 @@ def deck_exists(step, deck):
 @step(u'the card "([^"]*)" does not exist in the deck "([^"]*)"')
 def card_doesnt_exist_in_deck(step, card, deck):
      # Check db.
-    assert False, "this step must be implemented"
-
-@step(u'I create a card in the deck "([^"]*)" with the fields:')
-def create_card_in_deck(step, deck):
-     # Check db.
-     # Re-use other steps!
     assert False, "this step must be implemented"
 
 @step(u'the card "([^"]*)" exists in the deck "([^"]*)"')
@@ -89,21 +104,6 @@ def deck_doesnt_exists(step, deck):
      # Check db.
     assert False, "this step must be implemented"
 
-@step(u'I create the deck "([^"]*)"')
-def create_deck(step, deck):
-     # Check db.
-    assert False, "this step must be implemented"
-
-@step(u'I go to (.*)')
-def go_to_page(step, page):
-    if page in world.page_map.keys():
-        url = world.page_map[page]
-        world.response = world.browser.visit(django_url(url))
-
-@step(u'I see the deck "([^"]*)" in my portfolio')
-def see_deck_in_portfolio(step, deck):
-    # Web driver.
-    assert False, "this step must be implemented"
 
 # Edit card
 
