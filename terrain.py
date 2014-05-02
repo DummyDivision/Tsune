@@ -27,6 +27,10 @@ def user_present(username):
     return False
 world.user_present = user_present
 
+# Maps the page names to the actual urls.
+world.page_map = {"the login page": "/user/login/",
+                  "the main page": "/cardbox/"}
+
 @before.runserver
 def setup_database(actual_server):
     world.test_runner = DjangoTestSuiteRunner(interactive=False)

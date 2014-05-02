@@ -4,11 +4,10 @@ from lettuce import step,world
 # User and login related steps.
 @step (u'I am on (.*)')
 def am_on_page(step, page):
-    if page == "the main page":
-        expected_url = django_url('/cardbox/')
-    else:
-        expected_url = page
-    assert world.browser.url == expected_url, 'The url seems to be wrong.'
+    expected_url = ""
+    if page in world.page_map.keys():
+        expected_url = world.page_map[page]
+    assert world.browser.url == django_url(expected_url), 'The url seems to be wrong.'
 
 @step(u'I enter "([^"]*)" and "([^"]*)"')
 def enter_username_and_password(step, username, password):
@@ -97,12 +96,9 @@ def create_deck(step, deck):
 
 @step(u'I go to (.*)')
 def go_to_page(step, page):
-     # If the site name is used, map it to the actual url.
-    if page == u'the login page':
-        url = '/user/login/'
-    else:
-        url = page
-    world.response = world.browser.visit(django_url(url))
+    if page in world.page_map.keys():
+        url = world.page_map[page]
+        world.response = world.browser.visit(django_url(url))
 
 @step(u'I see the deck "([^"]*)" in my portfolio')
 def see_deck_in_portfolio(step, deck):
