@@ -1,11 +1,19 @@
+from django.conf import settings
 from django.core.management import call_command
 from django.test.simple import DjangoTestSuiteRunner
 
 from lettuce import before, after, world
 from logging import getLogger
+import os
 from pyvirtualdisplay import Display
 from splinter import Browser
 from guardian.models import User
+import tsune
+
+try:
+	from south.management.commands import patch_for_test_db_setup
+except:
+	pass
 
 logger = getLogger(__name__)
 logger.info("Loading the terrain file...")
@@ -23,18 +31,21 @@ world.user_present = user_present
 def setup_database(actual_server):
     world.test_runner = DjangoTestSuiteRunner(interactive=False)
     DjangoTestSuiteRunner.setup_test_environment(world.test_runner)
-    world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
-    call_command('syncdb', interactive=False, verbosity=0)
-    call_command('migrate', verbosity=0)
+    settings.DEBUG = True
+    #world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
+    call_command('syncdb', settings=tsune.settings.ci,interactive=False, verbosity=1)
+    #call_command('flush', interactive=False)
+    call_command('migrate',settings=tsune.settings.ci, interactive=False, verbosity=1)
     call_command('loaddata', 'LettuceFixtures.json', verbosity=0)
 
 @after.runserver
 def teardown_database(actual_server):
     """    This will destroy your test database after all of your tests have executed.
     """
-    logger.info("Destroying the test database ...")
-
-    DjangoTestSuiteRunner.teardown_databases(world.test_runner, world.created_db)
+    logger.info("Flushing Database...")
+    call_command('flush', interactive=False)
+    #DjangoTestSuiteRunner.teardown_databases(world.test_runner, world.created_db) <- keine neue Datenbank
+    os.system("rm /vagrant/test-database.db")
 
 @before.all
 def start_browser():
@@ -53,3 +64,4 @@ def quit_browser(total):
     logger.info("Gracefully quit headless browser...")
     world.browser.quit()
     world.display.stop()
+    logger.info("Remove test-database.db...")
