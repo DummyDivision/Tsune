@@ -27,6 +27,14 @@ def user_present(username):
     return False
 world.user_present = user_present
 
+def get_user(username):
+    """ Returns the first user that matches the username.
+    """
+    matchresult = User.objects.filter(username=username)
+    if matchresult.count() > 0:
+        return matchresult[0]
+world.get_user = get_user
+
 # Maps the page names to the actual urls.
 world.page_map = {"the login page": "/user/login/",
                   "the main page":  "/cardbox/",

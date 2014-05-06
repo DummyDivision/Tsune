@@ -10,13 +10,14 @@ def go_to_page(step, page):
 
 @step(u'"([^"]*)" is the name of a registered user')
 def is_the_name_of_registered_user(step, username):
-    user_present = world.user_present(username=username)
-    assert user_present, 'The user ' + username + 'does not exist.'
+    user_is_present = world.user_present(username=username)
+    assert user_is_present, 'The user ' + username + ' does not exist.'
 
-@step(u'user password is set to "([^"]*)"')
-def password_is_set_to(step, password):
-    # Check db.
-    assert False, 'This step must be implemented'
+@step(u'the password of "([^"]*)" is set to "([^"]*)"')
+def password_is_set_to(step, username, password):
+    user = world.get_user(username)
+    password_is_correct = user.check_password(password)
+    assert password_is_correct, password + ' is not the password for user ' + username
 
 @step(u'I enter "([^"]*)" and "([^"]*)"')
 def enter_username_and_password(step, username, password):
@@ -32,15 +33,15 @@ def am_on_page(step, page):
         expected_url = world.page_map[page]
     assert world.browser.url == django_url(expected_url), 'The url seems to be wrong.'
 
+@step(u'"([^"]*)" is not the name of a registered user')
+def is_not_the_name_of_registered_user(step, username):
+    user_is_not_present = world.user_present(username=username) == False
+    assert user_is_not_present, 'The user ' + username + 'does exist.'
+
 @step(u'I see the message "([^"]*)"')
 def see_message(step, message):
     # Web driver: find message on page.
     assert world.browser.is_text_present(message), 'Expected message was not found.'
-
-@step(u'"([^"]*)" is not the name of a registered user')
-def user_is_not_registered(step, username):
-    # Check db.
-    assert False, 'This step must be implemented'
 
 @step(u'user password is wrong')
 def password_is_wrong(step):

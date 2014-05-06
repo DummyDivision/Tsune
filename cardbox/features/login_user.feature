@@ -8,13 +8,13 @@ Feature: Sign in
 
   Scenario: Sign in is successful
     Given "testuser" is the name of a registered user
-    And user password is set to "Pa$$w0rd"
+    And the password of "testuser" is set to "Pa$$w0rd"
     When I enter "testuser" and "Pa$$w0rd"
     Then I am on the main page
 
   Scenario: Sign in failed because of an incorrect password
     Given "testuser" is the name of a registered user
-    And user password is set to "Pa$$w0rd"
+    And the password of "testuser" is set to "Pa$$w0rd"
     When I enter "testuser" and "WrongPa$$w0rd"
     Then I see the message "Fehler! Benutzername oder Passwort sind ungültig."
 
