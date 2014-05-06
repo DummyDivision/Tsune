@@ -45,9 +45,8 @@ def see_message(step, message):
 
 # Steps first appearing in scenario Create Deck"
 @step(u'I am logged in as "([^"]*)"')
-def am_logged_in(step):
-
-    assert User.user.is_authenticated(), "this step must be implemented"
+def am_logged_in(step, username):
+    assert world.user_is_authenticated(username), 'User "' + username +'" is not logged in.'
 
 @step(u'the card "([^"]*)" does not exist in the deck "([^"]*)"')
 def card_doesnt_exist_in_deck(step, card, deck):

@@ -36,8 +36,14 @@ def get_user(username):
 world.get_user = get_user
 
 def user_is_authenticated(username):
+    """ Returns true if the user for a given username exists and is currently logged in.
+    """
     user = get_user(username)
-    return user.is_authenticated()
+    if user is not None:
+        return user.is_authenticated()
+    return False
+
+world.user_is_authenticated = user_is_authenticated
 
 # Maps the page names to the actual urls.
 world.page_map = {"the login page": "/user/login/",
@@ -50,9 +56,9 @@ def setup_database(actual_server):
     DjangoTestSuiteRunner.setup_test_environment(world.test_runner)
     settings.DEBUG = True
     #world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
-    call_command('syncdb', settings=tsune.settings.ci,interactive=False, verbosity=1)
+    call_command('syncdb', settings=tsune.settings.ci,interactive=False, verbosity=0)
     #call_command('flush', interactive=False)
-    call_command('migrate',settings=tsune.settings.ci, interactive=False, verbosity=1)
+    call_command('migrate',settings=tsune.settings.ci, interactive=False, verbosity=0)
     call_command('loaddata', 'LettuceFixtures.json', verbosity=0)
 
 @after.runserver
