@@ -4,7 +4,7 @@ Feature: Edit Deck
   I want to edit a deck
   
   Background:
-    Given I am logged in
+    Given I am logged in as "testuser"
     And the deck "Datenbanken" exists in my portfolio
     And I see the edit deck dialog
     

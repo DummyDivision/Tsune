@@ -43,15 +43,11 @@ def see_message(step, message):
     # Web driver: find message on page.
     assert world.browser.is_text_present(message), 'Expected message was not found.'
 
-@step(u'user password is wrong')
-def password_is_wrong(step):
-    # Check db.
-    assert False, 'This step must be implemented'
-
 # Steps first appearing in scenario Create Deck"
-@step(u'I am logged in')
+@step(u'I am logged in as "([^"]*)"')
 def am_logged_in(step):
-    assert False, "this step must be implemented"
+
+    assert User.user.is_authenticated(), "this step must be implemented"
 
 @step(u'the card "([^"]*)" does not exist in the deck "([^"]*)"')
 def card_doesnt_exist_in_deck(step, card, deck):

@@ -4,7 +4,7 @@ Feature: Edit Card
   I want to edit a given card
   
   Background:
-    Given I am logged in
+    Given I am logged in as "testuser"
     And the deck "Datenbanken" exists in my portfolio
     And the card "foo?" exists in the deck "Datenbanken"
     And I see the edit card dialog

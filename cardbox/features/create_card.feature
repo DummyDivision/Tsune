@@ -4,7 +4,7 @@ Feature: Create Card
   I want to create a card in a given deck
   
   Background:
-    Given I am logged in
+    Given I am logged in as "testuser"
     And the deck "Datenbanken" exists in my portfolio
   
   Scenario: Create a new card in a specified deck

@@ -35,6 +35,10 @@ def get_user(username):
         return matchresult[0]
 world.get_user = get_user
 
+def user_is_authenticated(username):
+    user = get_user(username)
+    return user.is_authenticated()
+
 # Maps the page names to the actual urls.
 world.page_map = {"the login page": "/user/login/",
                   "the main page":  "/cardbox/",

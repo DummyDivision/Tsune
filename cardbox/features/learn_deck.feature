@@ -4,7 +4,7 @@ Feature: Learn Deck
   I want to learn a deck
   
   Background:
-    Given I am logged in
+    Given I am logged in as "testuser"
     And the deck "Datenbanken" exists in my portfolio
     
   Scenario: Enter learning dialog if there are unlearned cards

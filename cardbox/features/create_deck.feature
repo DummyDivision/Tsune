@@ -4,7 +4,7 @@ Feature: Create Deck
   I want to create a deck in my portfolio
   
   Background: 
-    Given I am logged in
+    Given I am logged in as "testuser"
     
   Scenario: Create a new deck in user portfolio
     Given the deck "Datenbanken" does not exist in my portfolio
