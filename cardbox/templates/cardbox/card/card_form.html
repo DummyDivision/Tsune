@@ -14,7 +14,7 @@
                                <b>Fehler!</b>
                             </div>
                 {% endif %}
-                <form method="post">{% csrf_token %}
+                <form method="post" autocomplete="off">{% csrf_token %}
                     <h2 class="card-h2">Karte {{ action }}</h2>
 
                     <div class="form-group">
