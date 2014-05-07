@@ -63,20 +63,14 @@ def see_deck_in_portfolio(step, deck):
     # Web driver.
     assert False, "this step must be implemented"
 
-@step(u'the deck "([^"]*)"( already)? exists in my portfolio')
-def deck_exists(step, deck):
-     # Check db.
-    assert False, "this step must be implemented"
-
-@step(u'the card "([^"]*)" does not exist in the deck "([^"]*)"')
-def card_doesnt_exist_in_deck(step, card, deck):
-     # Check db.
-    assert False, "this step must be implemented"
+@step(u'the deck "([^"]*)" exists in my portfolio')
+def deck_exists(step, deckname):
+    # TODO: Nur solche decks beachten, die auch dem User zugeordnet sind.
+    assert world.deck_present(deckname), deckname + ' does not exit in the user portfolio'
 
 @step(u'the card "([^"]*)" exists in the deck "([^"]*)"')
-def card_exist_in_deck(step, card, deck):
-     # Check db.
-    assert False, "this step must be implemented"
+def card_exists_in_deck(step, cardfront, decktitle):
+     assert world.card_from_deck_present(cardfront, decktitle), cardfront + 'does not exist in ' + decktitle
 
 @step(u'the card has the field "([^"]*)" set to ([^"]*)')
 def card_has_field_set_to(step, field, text):

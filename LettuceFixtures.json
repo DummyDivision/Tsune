@@ -15,4 +15,26 @@
         "email": "",
         "date_joined": "2014-04-30T09:22:34.577Z"
     }
+},
+{
+    "pk": 1,
+    "model": "cardbox.deck",
+    "fields": {
+        "created": "2014-05-07T08:25:28.290Z",
+        "description": "Testdeck",
+        "title": "Datenbanken"
+    }
+
+},
+{
+    "pk": 1,
+    "model": "cardbox.card",
+    "fields": {
+        "created": "2014-05-07T09:37:36.661Z",
+        "deck": 1,
+        "_front_rendered": "<p>foo?</p>",
+        "back": "bar",
+        "_back_rendered": "<p>bar</p>",
+        "front": "foo?"
+    }
 }]

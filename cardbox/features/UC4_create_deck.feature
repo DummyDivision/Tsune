@@ -13,6 +13,6 @@ Feature: Create Deck
     Then I see the deck "Datenbanken" in my portfolio
     
   Scenario: Attempt to create a deck in user portfolio that already exists
-    Given the deck "Datenbanken" already exists in my portfolio
+    Given the deck "Datenbanken" exists in my portfolio
     When I create the deck "Datenbanken"
     Then I see the message "Deck existiert bereits"

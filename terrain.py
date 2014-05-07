@@ -8,6 +8,8 @@ import os
 from pyvirtualdisplay import Display
 from splinter import Browser
 from guardian.models import User
+from cardbox.deck_model import Deck
+from cardbox.card_model import Card
 import tsune
 
 try:
@@ -35,6 +37,39 @@ def get_user(username):
         return matchresult[0]
 world.get_user = get_user
 
+def deck_present(title):
+    """ Checks the database if a deck for a given deckname exists.
+    """
+    if get_deck(title):
+        return True
+    return False
+world.deck_present = deck_present
+
+def get_card_from_deck(cardfront, decktitle):
+    """ Returns the first card that matches the front in a given deck.
+    """
+    deck = get_deck(decktitle)
+    matchresult = Card.objects.filter(front=cardfront, deck=deck.ID)
+    if matchresult.count() > 0:
+        return matchresult[0]
+world.get_card_from_deck = get_card_from_deck
+
+def card_from_deck_present(cardfront, decktitle):
+    """ Checks the database if the card with a given fron exists in the given deck.
+    """
+    if get_card_from_deck(cardfront, decktitle):
+        return True
+    return False
+world.card_from_deck_present = card_from_deck_present
+
+def get_deck(title):
+    """ Returns the first deck that matches the username.
+    """
+    matchresult = Deck.objects.filter(title=title)
+    if matchresult.count() > 0:
+        return matchresult[0]
+world.get_deck = get_deck
+
 def user_is_authenticated(username):
     """ Returns true if the user for a given username exists and is currently logged in.
     """
@@ -42,7 +77,6 @@ def user_is_authenticated(username):
     if user is not None:
         return user.is_authenticated()
     return False
-
 world.user_is_authenticated = user_is_authenticated
 
 # Maps the page names to the actual urls.
