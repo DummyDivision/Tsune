@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'profiles',
     'inplaceeditform',
     'comic',
+    'cardimporter',
 )
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
@@ -195,8 +196,10 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Settings for Markitup
-MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
-MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True})
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
+                                                                           'cardimporter.markdown_ext.subscript']})
+MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
+                                                                           'cardimporter.markdown_ext.subscript']})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markituptsu'
 
