@@ -197,9 +197,10 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Settings for Markitup
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
-                                                                           'cardimporter.markdown_ext.subscript']})
+                                                                           'cardimporter.markdown_ext.subscript',
+                                                                           'cardimporter.markdown_ext.mathjax']})
 MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
-                                                                           'cardimporter.markdown_ext.subscript']})
+                                                                           'cardimporter.markdown_ext.mathjax']})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markituptsu'
 
