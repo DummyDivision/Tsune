@@ -1,7 +1,7 @@
 from environment import *
 from unipath import Path
 
-PROJECT_DIR = Path(__file__).ancestor(2) # Gets absolute project path for file creation et al
+PROJECT_DIR = Path(__file__).ancestor(2)  # Gets absolute project path for file creation et al
 
 DATABASES = {
     'default': {
@@ -11,7 +11,7 @@ DATABASES = {
         'PASSWORD': 'Pa$$w0rd',
         'HOST': '',
         'PORT': '',
-        }
+    }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -38,7 +38,6 @@ USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -170,13 +169,13 @@ LOGIN_REDIRECT_URL = '/cardbox/'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'guardian.backends.ObjectPermissionBackend',
-      'social.backends.open_id.OpenIdAuth',
-      'social.backends.google.GoogleOpenId',
-      'social.backends.google.GoogleOAuth2',
-      'social.backends.facebook.FacebookOAuth2',
-      'social.backends.google.GoogleOAuth',
-      'social.backends.dropbox.DropboxOAuth2',
-      'django.contrib.auth.backends.ModelBackend',
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth',
+    'social.backends.dropbox.DropboxOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 ANONYMOUS_USER_ID = -1
 
@@ -199,8 +198,10 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
                                                                            'cardimporter.markdown_ext.subscript',
                                                                            'cardimporter.markdown_ext.mathjax']})
-MARKITUP_PREVIEW_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
-                                                                           'cardimporter.markdown_ext.mathjax']})
+MARKITUP_PREVIEW_FILTER = (
+    'markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
+                                                            'cardimporter.markdown_ext.subscript',
+                                                            'cardimporter.markdown_ext.mathjax']})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markituptsu'
 
@@ -208,7 +209,7 @@ MARKITUP_SKIN = 'markituptsu'
 # InPlaceEdit Settings
 INPLACEEDIT_EVENT = "click"
 
-ADAPTOR_INPLACEEDIT={'markitup':'profiles.fields.AdaptorMarkItUp'}
+ADAPTOR_INPLACEEDIT = {'markitup': 'profiles.fields.AdaptorMarkItUp'}
 
 # Fancy logic to generate or load SECRET_KEY
 if try_env_variable("SECRET_KEY") is None:
@@ -218,7 +219,9 @@ if try_env_variable("SECRET_KEY") is None:
     except IOError:
         try:
             import random
-            SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+
+            SECRET_KEY = ''.join(
+                [random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
             secret_temp = "SECRET_KEY = '" + SECRET_KEY + "'"
             secret = file(secret_file, 'w')
             secret.write(secret_temp)
