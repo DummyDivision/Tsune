@@ -1,5 +1,7 @@
 from lettuce.django import django_url
 from lettuce import step,world
+from cardbox.card_model import Card
+
 
 # Steps first appearing in UC1 - Create Card.
 @step(u'I am logged in as "([^"]*)"')
@@ -17,7 +19,7 @@ def card_doesnt_exist_in_deck(step, cardfront, decktitle):
     assert card_present == False, 'The card ' + cardfront + ' is present in ' + decktitle + '.'
 
 @step(u'When I create a card in the deck "([^"]*)" with the fields:')
-def create_card_in_deck_fields(step, group1):
+def create_card_in_deck_with_fields(step, group1):
     assert False, 'This step must be implemented'
 
 @step(u'the card "([^"]*)" exists in the deck "([^"]*)"')
@@ -89,19 +91,29 @@ def see_dialog(step, dialog):
 # Steps first appearing in UC3 - Edit Card.
 
 @step(u'I create a card in the deck "([^"]*)" with the field "([^"]*)" set to "([^"]*)"')
-def create_card_with_field_set_to(step, deck, field, text):
-     # Check db.
-    assert False, "this step must be implemented"
+def create_card_with_field_set_to(step, deck_title, field_name, value):
+    deck = world.get_deck(deck_title)
+    if field_name == 'front':
+        card = Card(front=value ,back='testback', deck=deck)
+    elif field_name == 'back':
+        card = Card(front='testfront' ,back=value, deck=deck)
+    world.context_card = card # Make this card accessible through the context.
 
 @step(u'I change the value of the field "([^"]*)" to "([^"]*)"')
-def change_value_of_field(step, field_name, new_value):
-     # Check db.
-    assert False, "this step must be implemented"
+def change_value_of_card_field(step, field_name, new_value):
+    card = world.context_card
+    if field_name == 'front':
+        card.front = new_value
+    elif field_name == 'back':
+        card.back == new_value
+    assert card.save(), "Changes could not be saved"
 
 @step(u'the card has the field "([^"]*)" set to "([^"]*)"')
-def field_set_to_value(step, field_name, new_value):
-     # Check db.
-    assert False, "this step must be implemented"
+def field_set_to_value(step, field_name, value):
+    card = world.context_card
+    if field_name == 'front':
+        assert card.front == value
+    assert card.back == value
 
 # Steps first appearing in UC4 - Create Deck.
 

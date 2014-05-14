@@ -21,6 +21,10 @@ logger = getLogger(__name__)
 logger.info("Loading the terrain file...")
 logger.info("Loading functions and variables for world...")
 
+# Context variables are used to reference objects created in earlier steps.
+world.context_card = None
+world.context_deck = None
+
 def get_user(username):
     """ Returns the first user that matches the username.
     """
@@ -69,6 +73,14 @@ def deck_present(title):
         return True
     return False
 world.deck_present = deck_present
+
+def card_front_is_set_to(card, value):
+    assert card.front == value, 'Card front is set to ' + card.front
+world.card_front_is_set_to = card_front_is_set_to
+
+def card_back_is_set_to(card, value):
+    assert card.back == value, 'Card back is set to ' + card.back
+world.card_back_is_set_to = card_back_is_set_to
 
 def user_is_authenticated(username):
     """ Returns true if the user for a given username exists and is currently logged in.
