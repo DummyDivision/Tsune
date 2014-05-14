@@ -21,14 +21,6 @@ logger = getLogger(__name__)
 logger.info("Loading the terrain file...")
 logger.info("Loading functions and variables for world...")
 
-def user_present(username):
-    """ Checks the database if a user for a given username exists.
-    """
-    if User.objects.filter(username=username).count():
-        return True
-    return False
-world.user_present = user_present
-
 def get_user(username):
     """ Returns the first user that matches the username.
     """
@@ -37,13 +29,13 @@ def get_user(username):
         return matchresult[0]
 world.get_user = get_user
 
-def deck_present(title):
-    """ Checks the database if a deck for a given deckname exists.
+def user_present(username):
+    """ Checks the database if a user for a given username exists.
     """
-    if get_deck(title):
+    if User.objects.filter(username=username).count():
         return True
     return False
-world.deck_present = deck_present
+world.user_present = user_present
 
 def get_card_from_deck(cardfront, decktitle):
     """ Returns the first card that matches the front in a given deck.
@@ -70,6 +62,14 @@ def get_deck(title):
         return matchresult[0]
 world.get_deck = get_deck
 
+def deck_present(title):
+    """ Checks the database if a deck for a given deckname exists.
+    """
+    if get_deck(title):
+        return True
+    return False
+world.deck_present = deck_present
+
 def user_is_authenticated(username):
     """ Returns true if the user for a given username exists and is currently logged in.
     """
@@ -89,9 +89,7 @@ def setup_database(actual_server):
     world.test_runner = DjangoTestSuiteRunner(interactive=False)
     DjangoTestSuiteRunner.setup_test_environment(world.test_runner)
     settings.DEBUG = True
-    #world.created_db = DjangoTestSuiteRunner.setup_databases(world.test_runner)
     call_command('syncdb', settings=tsune.settings.ci,interactive=False, verbosity=0)
-    #call_command('flush', interactive=False)
     call_command('migrate',settings=tsune.settings.ci, interactive=False, verbosity=0)
     call_command('loaddata', 'LettuceFixtures.json', verbosity=0)
 
@@ -101,7 +99,6 @@ def teardown_database(actual_server):
     """
     logger.info("Flushing Database...")
     call_command('flush', interactive=False)
-    #DjangoTestSuiteRunner.teardown_databases(world.test_runner, world.created_db) <- keine neue Datenbank
     os.system("rm /vagrant/test-database.db")
 
 @before.all
