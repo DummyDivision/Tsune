@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+   TeX: {
+    extensions: ["{% static "learning/js/mathjax/preamble.js"    %}"]
+  },
+  tex2jax: {inlineMath: [['$','$']]}
+});
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    preamble: [
+      //"\\usepackage{amssymb,amsmath,amsfonts}",
+      "\\renewcommand{\\vec}[1]{\\mathbf{#1}}",
+      "\\newcommand{\\vect}[1]{\\begin{bmatrix} #1 \\end{bmatrix}}",
+      "\\newenvironment{mtx}{\\begin{bmatrix}}{\\end{bmatrix}}",
+      "\\newcommand{\\skalar}[2]{\\langle #1, #2 \\rangle}",
+      "\\newcommand{\\betrag}[1]{\\lvert #1 \\rvert}",
+    ]
+  }
+});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
