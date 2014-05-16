@@ -16,19 +16,6 @@ mathMarke = [(r'[$$]',r'[/$$]'),(r'[$]',r'[/$]')]
 ankiTagToMarkDown = { "b":r"**", "i":r"*", "u":r"_","sup":r"^", "sub":"~"}
 htmlParser = HTMLParser()
 
-def _strip_tags(soup):
-    soup = BeautifulSoup(soup)
-    for tag in soup.findAll(True):
-        s = ""
-
-        for c in tag.contents:
-            if not isinstance(c, NavigableString):
-                c = _strip_tags((c))
-            s += (c)
-
-        tag.replaceWith(s)
-    return soup
-
 def _preproccAnki(anki):
     """Escapes all markdown tags in all content (e.g. ^^ emoticon) except inside math delimiters"""
     anki = mathSyntax.sub(r"\g<1>\g<2>\g<1>", anki)
