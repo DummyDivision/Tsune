@@ -22,5 +22,6 @@ PROJECT_APPS = {
     'cardbox',
     'deckglue',
     'memorize',
+    'cardimporter'
 }
 
