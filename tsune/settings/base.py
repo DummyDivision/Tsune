@@ -6,6 +6,7 @@ PROJECT_DIR = Path(__file__).ancestor(2)  # Gets absolute project path for file 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENCODING': 'UTF-8',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'Pa$$w0rd',
@@ -197,11 +198,13 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 # Settings for Markitup
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
                                                                            'cardimporter.markdown_ext.subscript',
-                                                                           'cardimporter.markdown_ext.mathjax']})
+                                                                           'cardimporter.markdown_ext.mathjax',
+                                                                           'cardimporter.markdown_ext.underline']})
 MARKITUP_PREVIEW_FILTER = (
     'markdown.markdown', {'safe_mode': True, 'extensions': ['cardimporter.markdown_ext.superscript',
                                                             'cardimporter.markdown_ext.subscript',
-                                                            'cardimporter.markdown_ext.mathjax']})
+                                                            'cardimporter.markdown_ext.mathjax',
+                                                            'cardimporter.markdown_ext.underline']})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markituptsu'
 
