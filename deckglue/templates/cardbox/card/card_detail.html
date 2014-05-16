@@ -1,0 +1,22 @@
+{% extends "cardbox/base.html" %}
+{% block title %}Tsune - Kartenansicht - Neu{% endblock %}
+{% block head %}
+{% include "cardbox/card/mathjax_include.html" %}
+{% endblock %}
+{% block content %}
+    {% block delete %}
+        {% include "cardbox/card/card_delete_popup.html" %}
+    {% endblock %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div>
+                {% block card_content %}
+                    {% include "cardbox/card/card_content.html" %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% block buttons %}
+         {% include "cardbox/card/card_detail_buttonbar.html" %}
+    {% endblock %}
+{% endblock %}
