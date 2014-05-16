@@ -17,33 +17,20 @@ within paragraphs will not.
 Adapted from https://github.com/sgraber/markdown.subscript/blob/master/subscript.py
 """
 
-import markdown
-from markdown.util import etree, AtomicString
+from markdown.inlinepatterns import SimpleTagPattern
+from markdown import Extension
 
 # Global Vars
-SUBSCRIPT_RE = r'(\~)([^\~]*)\2'  # the number is subscript~2~
+SUBSCRIPT_RE = r'(\~)(.*?)(\~)'
 
-class SubscriptPattern(markdown.inlinepatterns.Pattern):
-    """ Return a subscript Element: `C~6~H~12~O~6~' """
-    def handleMatch(self, m):
-        subsc = m.group(3)
-
-        text = subsc
-
-        el = etree.Element("sub")
-        el.text = AtomicString(text)
-        return el
-
-class SubscriptExtension(markdown.Extension):
+class SubscriptExtension(Extension):
     """ Subscript Extension for Python-Markdown. """
 
     def extendMarkdown(self, md, md_globals):
-        """ Replace subscript with SubscriptPattern """
-        md.inlinePatterns['subscript'] = SubscriptPattern(SUBSCRIPT_RE, md)
+        # Create subscript pattern
+        sub_tag = SimpleTagPattern(SUBSCRIPT_RE,"sub")
+        md.ESCAPED_CHARS.append('~')
+        md.inlinePatterns.add('subscript', sub_tag, "<not_strong")
 
-def makeExtension(configs=None):
+def makeExtension(configs=None) :
     return SubscriptExtension(configs=configs)
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
