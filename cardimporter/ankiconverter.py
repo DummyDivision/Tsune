@@ -65,7 +65,9 @@ def _handleCloze(clozeString):
     return [front, back]
 
 def _scanAllOtherTagsForStyles(soup):
-    # TODO ...sigh
+    for tag in soup.find_all('span'):
+        if tag.string and not tag.string.strip() == "":
+            _markdownWrapIfStyleMatches(tag)
     return soup
 
 def _replaceBrWithNl(anki):
