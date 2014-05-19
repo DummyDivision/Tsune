@@ -73,7 +73,7 @@ def _replaceBrWithNl(anki):
     return anki
 
 def _handleGenericInsertBeforeTag(tag,insert):
-    if tag is None:
+    if tag is None or tag.string is None or tag.string.strip() == "":
         return
     _markdownWrapIfStyleMatches(tag)
     tag.insert_before(insert)
@@ -86,7 +86,7 @@ def _markdownWrapIfStyleMatches(tag):
         _ifRegExInStyle(tag,understyle,ankiTagToMarkDown['u'])
 
 def _handleGenericWrapTag(tag,wrap):
-    if tag is None:
+    if tag is None or tag.string is None or tag.string.strip() == "":
         return
     _markdownWrapIfStyleMatches(tag)
     _wrapTagWith(tag,wrap)
