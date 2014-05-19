@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'inplaceeditform',
     'comic',
     'cardimporter',
+    'upload',
 )
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'
