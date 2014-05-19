@@ -20,7 +20,7 @@
     <nav class="navbar" role="navigation">
       <ul class="nav navbar-nav navbar-default navbar-right white-backgrd">
         {% if user.is_authenticated %}
-        <li><p class="navbar-text">{{  user.email }}</p></li>
+        <li><a href="{% url 'profile:profile' user.id %}">{{  user.email }}</a></li>
         {% endif %}
         <li><a href="{% url 'deck:deck_list' %}"><span class="glyphicon glyphicon-th"></span>&nbsp;Meine Decks</a></li>
         <li>
@@ -32,10 +32,13 @@
           {% block actions %}
             <li>
               <a href="http://tsune.readthedocs.org" target="_blank">Dokumentation</a>
-            </li>{% if user.is_authenticated %}
+            </li>
+            <li>
+              <a href="{% url 'upload:upload' %}">Import Anki</a>
+            </li>
             <li>
               <a href="{% url 'logout' %}">Logout</a>
-            </li>{% endif %}
+            </li>
           {% endblock %}
           </ul>
         </li>
