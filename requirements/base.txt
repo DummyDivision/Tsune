@@ -16,3 +16,5 @@ Unipath==1.0
 django-inplaceedit==1.3.0
 beautifulsoup4>=4.3.2
 requests>=2.2.1
+simplejson==3.4.1
+
