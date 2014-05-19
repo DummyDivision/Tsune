@@ -1,3 +1,4 @@
+from django.db import transaction
 from guardian.shortcuts import assign_perm
 from sourcereader import AnkiCardSourceReader
 from ankiconverter import ankiTupeToTsuneDict
@@ -5,6 +6,7 @@ from cardbox.card_model import Card, Deck
 
 class AnkiImporter():
 
+    @transaction.commit_on_success
     def importCollection(self,pathToApkg,user):
         with AnkiCardSourceReader(pathToApkg) as ankireader:
             self._createCollection(ankireader, user)
