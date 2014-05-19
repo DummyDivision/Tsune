@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'markitup',
     'profiles',
     'inplaceeditform',
+    'comic',
 )
 
 AUTH_PROFILE_MODULE = 'profiles.UserProfile'

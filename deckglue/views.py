@@ -68,7 +68,7 @@ class next_practice_item(TemplateView):
         else:
             all_practice_for_this_deck = Practice.objects.filter(next_practice__lte=datetime.datetime.utcnow().replace(tzinfo=utc), user=self.request.user, object_id__in=all_card_ids_for_deck).order_by('next_practice')
         if len(all_practice_for_this_deck) is 0:
-            return render(self.request, template_name="learning/learn_done.html")
+            return HttpResponseRedirect("/comic/")
         else:
             kwargs['practice'] = all_practice_for_this_deck[0]
             return super(next_practice_item,self).get(request,*args,**kwargs)

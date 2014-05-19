@@ -23,5 +23,6 @@ urlpatterns = patterns('',
     url(r'^cardbox/cards/', include('deckglue.cardurls', namespace="card")),
     url(r'^markitup/', include('markitup.urls')),
     url(r'^profile/', include('profiles.urls')),
-    url(r'^inplaceeditform/', include('inplaceeditform.urls'))
+    url(r'^inplaceeditform/', include('inplaceeditform.urls')),
+    url(r'^comic/', include('comic.urls'))
 )
