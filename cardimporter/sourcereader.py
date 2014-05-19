@@ -24,9 +24,10 @@ class AnkiCardSourceReader():
 
     def _extractSqlLiteDBFromAnkiArchive(self, path):
         apkgFile = ZipFile(path)
-        apkgFile.extract("collection.anki2")
+        dir_path = dirname(path)
+        apkgFile.extract("collection.anki2", dir_path)
         apkgFile.close()
-        return dirname(path)+'''/collection.anki2'''
+        return dir_path+'''/collection.anki2'''
 
     def _selectOnDb(self, query):
         cur = self.connection.cursor()
@@ -36,7 +37,6 @@ class AnkiCardSourceReader():
     def _fixRawListOfAnkiCards(self, rawAnkiCards):
         # Since this returns tuple such as ('front\x1f\x1fback','') a fix is needed to remove empty element
         # Split at \xf1\xf1 to get back
-        #return [htmlParser.unescape(card[0]).split('\x1f',1) for card in rawAnkiCards]
         return [card[0].split('\x1f',1) for card in rawAnkiCards]
 
     def getRawListOfAnkiCardTuples(self):
