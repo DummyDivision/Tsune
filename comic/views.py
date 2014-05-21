@@ -11,6 +11,11 @@ class ComicView(TemplateView):
     _alt = "Tape Measure"
 
     def scrape_xkcd(self):
+        """Get a comic from XKCD's random site.
+
+        The determined values are written to self._valid, self._url, self._title and self._alt
+
+        """
         r = get("http://c.xkcd.com/random/comic/", timeout=0.7)
         soup = BeautifulSoup(r.text)
         div = soup.find("div", id="comic")
@@ -21,6 +26,11 @@ class ComicView(TemplateView):
         self._alt = image["alt"]
 
     def get_comic(self):
+        """Run scrape_xkcd in a separate thread and kill it after a one second timeout if necessary.
+
+        Returns url, title, alt of the scraped comic
+
+        """
         t = Thread(target=self.scrape_xkcd)
         t.start()
         t.join(1)
