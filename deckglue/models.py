@@ -9,7 +9,7 @@ from memorize.models import Practice
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.utils.timezone import utc
-
+from profiles.models import Profile
 
 
 @receiver(post_save, sender=UserObjectPermission)
@@ -35,6 +35,12 @@ def create_practice_objects_for_new_card(sender,update_fields, **kwargs):
         if Practice.objects.filter(object_id = kwargs['instance'].ID, user=user).count() == 0:
             practice.save()
 
+
+@receiver(post_save, sender=User)
+def create_profile_for_new_user(sender,update_fields, **kwargs):
+    """Creates a profile for a new user. Fills default nickname value."""
+    if Profile.objects.filter(user=kwargs['instance']).count() is 0 :
+        Profile.objects.create(user=kwargs['instance'], nickname=kwargs['instance'].email.split('@')[0])
 
 
 @receiver(pre_delete, sender=Card)
