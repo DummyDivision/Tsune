@@ -10,7 +10,7 @@ def am_logged_in(step, username):
 
 @step(u'the deck "([^"]*)" exists in my portfolio')
 def deck_exists(step, deckname):
-    # TODO: Nur solche decks beachten, die auch dem User zugeordnet sind.
+    # TODO: Nur solche Decks beachten, die auch dem User zugeordnet sind.
     assert world.deck_present(deckname), deckname + ' does not exit in the user portfolio'
 
 @step(u'the card "([^"]*)" does not exist in the deck "([^"]*)"')
@@ -18,9 +18,11 @@ def card_doesnt_exist_in_deck(step, cardfront, decktitle):
     card_present = world.card_from_deck_present(cardfront, decktitle)
     assert card_present == False, 'The card ' + cardfront + ' is present in ' + decktitle + '.'
 
-@step(u'When I create a card in the deck "([^"]*)" with the fields:')
-def create_card_in_deck_with_fields(step, group1):
-    assert False, 'This step must be implemented'
+@step(u'When I create a card in the deck "([^"]*)" with the front set to "([^"]*)" and the back set to "([^"]*)"')
+def create_card_in_deck_with_front_and_back(step, deckname, cardfront, cardback):
+    deck = world.get_deck(deckname)
+    card = Card(front=cardfront ,back=cardback, deck=deck)
+    card.save()
 
 @step(u'the card "([^"]*)" exists in the deck "([^"]*)"')
 def card_exists_in_deck(step, cardfront, decktitle):
@@ -80,18 +82,19 @@ def rate_card(step, rating):
 
 @step(u'the card is rescheduled according to the rating "([^"]*)"')
 def card_is_rescheduled_according_to_ranking(step, rating):
-     # Check db.
+    # Check db.
     assert False, "this step must be implemented"
 
 @step(u'I see the (.*) dialog')
 def see_dialog(step, dialog):
-     # Web driver: check if on dialog.
+    # Web driver: check if on dialog.
     assert False, "this step must be implemented"
 
 # Steps first appearing in UC3 - Edit Card.
 
 @step(u'I create a card in the deck "([^"]*)" with the field "([^"]*)" set to "([^"]*)"')
 def create_card_with_field_set_to(step, deck_title, field_name, value):
+    #TODO: Create card via the browser.
     deck = world.get_deck(deck_title)
     if field_name == 'front':
         card = Card(front=value ,back='testback', deck=deck)

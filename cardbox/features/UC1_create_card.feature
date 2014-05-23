@@ -9,9 +9,7 @@ Feature: Create Card
   
   Scenario: Create a new card in a specified deck
     Given the card "foo?" does not exist in the deck "Datenbanken"
-    When I create a card in the deck "Datenbanken" with the fields:
-      | front  | back |
-      | "foo?" |"bar" |
+    When I create a card in the deck "Datenbanken" with the front set to "foo?" and the back set to "bar"
     Then the card "foo?" exists in the deck "Datenbanken"
     And the card has the field "back" set to "bar"
     And I see the message "Karte wurde erstellt"
