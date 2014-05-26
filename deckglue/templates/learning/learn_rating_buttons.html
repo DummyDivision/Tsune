@@ -3,26 +3,26 @@
         {% csrf_token %}
         <div class="row" style="padding-top:3px">
             <div class="col-md-2 col-md-offset-1">
-                <a class="small-margin btn btn-primary " onclick="$('#rating_value').val('-1'), $('#rating').submit();">Nochmal<br>
-                    <small>+10 min</small>
+                <a class="small-margin btn btn-primary " onclick="$('#rating_value').val('0'), $('#rating').submit();">Nochmal<br>
+                    <small>+10 m</small>
                 </a>
             </div>
             <div class="col-md-2">
                 <a class="small-margin btn btn-primary" name="hard"
-                   onclick="$('#rating_value').val('0'), $('#rating').submit();">Schwer<br>
-                    <small>+ {{ hard_time }} m</small>
+                   onclick="$('#rating_value').val('1'), $('#rating').submit();">Schwer<br>
+                    <small>+ {{ hard_time }} d</small>
                 </a>
             </div>
             <div class="col-md-2">
                 <a class="small-margin btn btn-primary" name="normal"
-                   onclick="$('#rating_value').val('2'), $('#rating').submit();"">Normal<br>
-                <small>+{{ normal_time }} m</small>
+                   onclick="$('#rating_value').val('3'), $('#rating').submit();"">Normal<br>
+                <small>+{{ normal_time }} d</small>
                 </a>
             </div>
             <div class="col-md-2">
                 <a class="small-margin btn btn-primary" name="easy"
-                   onclick="$('#rating_value').val('4'), $('#rating').submit();"">Einfach<br>
-                <small>+{{ easy_time }} m</small>
+                   onclick="$('#rating_value').val('5'), $('#rating').submit();"">Einfach<br>
+                <small>+{{ easy_time }} d</small>
                 </a>
             </div>
             <div class="col-md-2">

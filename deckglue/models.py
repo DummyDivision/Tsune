@@ -66,7 +66,7 @@ class DelayablePractice(Practice):
         """
         return self.get_all_due_for_user(user).filter(object_id__in=cardlist)
 
-    def delay(self):
+    def delay(self, minutes=10):
         """Delays card for review in this session.
 
         This function delays the next practice until either 10 minutes are up or the end of the session is
@@ -81,10 +81,10 @@ class DelayablePractice(Practice):
             return
         latest_due_practice = all_due_cards_in_deck.aggregate(Max('next_practice'))['next_practice__max']
 
-        # Pushed to end if end < 10 min
-        if (now-latest_due_practice) < timedelta(minutes=10):
-            self.next_practice = latest_due_practice + timedelta(milliseconds=1) # 1 ms since 10 min would undue
+        # Pushed to end if end < minutes
+        if (now-latest_due_practice) < timedelta(minutes=minutes):
+            self.next_practice = latest_due_practice + timedelta(milliseconds=1) # 1 ms since min would undue
         else:
-            self.next_practice = now + timedelta(minutes=10) # Now in ten minutes, I want to see that card again
+            self.next_practice = now + timedelta(minutes=minutes)
 
 

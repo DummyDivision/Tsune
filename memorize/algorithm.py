@@ -3,10 +3,10 @@
 """
 
 def interval(repetition, rating, easy_factor=2.5):
-    """Dummy Implementation of spacing algorithm. Does random stuff.
+    """Simplified SM-2 spacing algorithm.
 
-    This is just a dummy implementation of a spacing algorithm. It is going to be replaced with
-    a real algorithm in a future use case. It is loosely based on the SuperMemo 2 algorithm.
+    It is loosely based on the SuperMemo 2 algorithm. Details at:
+        http://www.supermemo.com/english/ol/sm2.htm
 
     Args:
      repetition (int): Number of repetitions until now.
@@ -15,12 +15,87 @@ def interval(repetition, rating, easy_factor=2.5):
 
     Returns:
       int: minutes until next practice
-      float: new easyfactor
+      float: new easiness factor
 
     """
-    if repetition <= 10:
-        repetition = 1
+    repetition, easy_factor = calculateEasyFactor(easy_factor, rating, repetition)
+    interval = calculateInterval(repetition, rating, easy_factor)
+
+    return interval, easy_factor
+
+def calculateInterval(repetition, rating, easy_factor):
+    """ Calculate the inter-repetition interval
+
+        I(1):= r/2
+        I(2):= r
+        for n>2 I(n):=I(n-1)*EF
+
+    where:
+        I(n) - inter-repetition interval after the n-th repetition (in days)
+        EF - easiness factor reflecting the easiness of memorizing and retaining a given item in memory.
+        r - Rating, given by the user.
+
+    The calculation is done recursively. Details at:
+        http://www.supermemo.com/english/ol/sm2.htm
+
+    The deviation from SM-2 consists in the following details:
+        - The default interval for the first and second repetition is not fixed to 1 and 6, but relative to
+          the user rating.
+
+    Args:
+     repetition (int): Number of repetitions until now.
+     easy_factor (float): easiness factor
+
+    Returns:
+      int: minutes until next practice
+
+    """
+    if repetition < 0:
+        raise ValueError, 'Repetition must be 0 at least!'
+
+    if easy_factor < 1.3:
+        raise ValueError, 'Easy factor must not be less than 1.3!'
+
+    if repetition < 2:
+        return rating/2
+    elif repetition==2:
+        return rating
     else:
-        repetition /= 10
-    i = 60*(rating+1) * 2 * repetition
-    return i, easy_factor
+        return calculateInterval(repetition-1, easy_factor)*easy_factor
+
+def calculateEasyFactor(oldEF, rating, repetition):
+    """ Calculate new easy factor from old factor and rating.
+
+     EF' := f(EF,q)
+     where,
+         EF' = new value of the easiness factor
+         EF  = old value of the easiness factor
+         q   = user difficulty rating (1-4)
+         f(EF,q)   = EF-0.8+0.28*q-0.02*q*q
+
+    Args:
+     oldEF (float): An factor for calculating the next repetition interval.
+     rating (int): Difficulty rating for the item in question. From 0 (impossible) to 5 (easiest).
+     repetition (int): Number of repetitions until now.
+
+    Returns:
+      int: minutes until next practice
+      float: new easiness factor
+
+    """
+    if oldEF < 1.3:
+        raise ValueError, 'Easy factor must not be less than 1.3!'
+
+    if rating not in xrange(0,6):
+        raise ValueError, 'Rating must be positive and less than 6!'
+
+    # If the card is rated < 2, the number of repetitions is reset.
+    if rating < 2:
+        repetition = 1
+
+    # Calculate new easy facor using the SM-2 formula.
+    newEF = oldEF - 0.8 + 0.28 * rating - 0.02 * rating * rating
+    if newEF < 1.3:
+        newEF=1.3
+
+    return repetition, newEF

@@ -83,9 +83,9 @@ class next_practice_item(TemplateView):
         context = super(next_practice_item, self).get_context_data(**kwargs)
         context['id'] =  kwargs['practice'].id
         context['object'] = kwargs['practice'].item
-        context['easy_time'] = interval(kwargs['practice'].times_practiced,4,2.5)[0]
-        context['normal_time'] = interval(kwargs['practice'].times_practiced,2,2.5)[0]
-        context['hard_time'] = interval(kwargs['practice'].times_practiced,0,2.5)[0]
+        context['easy_time'] = interval(kwargs['practice'].times_practiced,5,kwargs['practice'].easy_factor)[0]
+        context['normal_time'] = interval(kwargs['practice'].times_practiced,3,kwargs['practice'].easy_factor)[0]
+        context['hard_time'] = interval(kwargs['practice'].times_practiced,1,kwargs['practice'].easy_factor)[0]
         context['force'] = kwargs['force']
         kwargs['practice'].started_last_viewing = datetime.datetime.utcnow().replace(tzinfo=utc)
         kwargs['practice'].save()
@@ -101,13 +101,14 @@ def process_rating(request):
                                       pk=int(request.POST['id']))
     if request.POST['force'] == 'False':
         rating = int(request.POST['rating_value'])
-        if rating == -1:
-            practice_item.delay()
-        elif rating >= 0 and rating <= 4:
+        if rating < 2:
+            practice_item.delay(10)
+        elif rating == 2:
+            practice_item.delay(30)
+            practice_item.times_practiced += 1
+        else:
             practice_item.set_next_practice(rating)
-    else:
-        # Updating times practiced since it normally gets updated in set_next_practice
-        practice_item.times_practiced += 1
+
     practice_item.ended_last_viewing = datetime.datetime.utcnow().replace(tzinfo=utc)
     practice_item.save()
     return HttpResponseRedirect(reverse('learning:learning', args=(practice_item.item.deck_id,)))

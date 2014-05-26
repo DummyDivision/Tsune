@@ -51,16 +51,21 @@ class Practice(models.Model):
         """Uses the :func:`tsune.memorize.algorithm.interval` function to calculate next practice.
 
         Args:
-         rating (int): Rating from 0 (most difficult) to 4 (easiest) of difficulty of item.
+         rating (int): Rating from 0 (incorrect) to 5 (easiest) of difficulty of item:
+             5 - perfect response
+             3 - correct response after a hesitation
+             1 - correct response recalled with serious difficulty
+             0 - incorrect response
 
         """
         self.times_practiced += 1
-        minutes, ef = interval(self.times_practiced, rating, self.easy_factor)
-        self.next_practice = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=minutes)
+        practice_interval, ef = interval(self.times_practiced, rating, self.easy_factor)
+        self.delay(minutes=practice_interval*1440) # delay expects the interval in minutes.
         self.easy_factor = ef
+        self.save()
 
-    def delay(self):
-        """Simple delay. Adds 10 minutes to next practice.
+    def delay(self, minutes=10):
+        """Adds n minutes to next practice.
 
         """
-        self.next_practice = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=10)
+        self.next_practice = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=minutes)
