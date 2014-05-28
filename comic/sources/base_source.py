@@ -1,9 +1,10 @@
 from threading import Thread
+from tsune.settings.base import STATIC_URL
 
 
 class BaseSource:
     valid = False
-    url = None
+    url = STATIC_URL + "comic/error.png"
     title = None
     alt = None
 
@@ -30,4 +31,5 @@ class BaseSource:
                 t.join()
             else:
                 t._Thread__stop()
+
         return self.url, self.title, self.alt
