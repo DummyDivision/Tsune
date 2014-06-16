@@ -3,8 +3,9 @@ from django.db.models.aggregates import Max
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from cardbox.card_model import Card
-from guardian.shortcuts import assign_perm, get_users_with_perms
+from guardian.shortcuts import get_users_with_perms
 from guardian.models    import UserObjectPermission
+from memorize.algorithm import interval
 from memorize.models import Practice
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
@@ -68,23 +69,24 @@ class DelayablePractice(Practice):
 
     def delay(self, minutes=10):
         """Delays card for review in this session.
-
-        This function delays the next practice until either 10 minutes are up or the end of the session is
-        reached, whichever comes first.
-
+        This function delays the next practice by the given amount of minutes.
         """
         now = datetime.utcnow().replace(tzinfo=utc)
-        all_due_cards_in_deck = self.get_all_due_in_card_id_list(self.user, Card.objects.filter(deck=self.item.deck))
+        self.next_practice = now + timedelta(minutes=minutes)
 
-        # Don't delay if no cards left are due
-        if all_due_cards_in_deck.count() is 0:
-            return
-        latest_due_practice = all_due_cards_in_deck.aggregate(Max('next_practice'))['next_practice__max']
-
-        # Pushed to end if end < minutes
-        if (now-latest_due_practice) < timedelta(minutes=minutes):
-            self.next_practice = latest_due_practice + timedelta(milliseconds=1) # 1 ms since min would undue
+    def set_next_practice(self, rating):
+        """Uses the :func:`tsune.memorize.algorithm.interval` function to calculate next practice.
+        Args:
+         rating (int): Rating from 0 (incorrect) to 5 (easiest) of difficulty of item:
+             5 - perfect response
+             3 - correct response after a hesitation
+             1 - correct response recalled with serious difficulty
+             0 - incorrect response
+        """
+        if rating == 0:
+            self.times_practiced = 0
         else:
-            self.next_practice = now + timedelta(minutes=minutes)
-
-
+            self.times_practiced += 1
+        repetition_interval, self.easy_factor = interval(self.times_practiced, rating, self.easy_factor)
+        self.delay(minutes=repetition_interval)
+        self.save()

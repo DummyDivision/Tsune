@@ -2,16 +2,18 @@ from __future__ import division
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
+from django.utils.timezone import utc
 from cardbox.deck_views import DeckList
 from deckglue.models import DelayablePractice
 from memorize.models import Practice
 from memorize.algorithm import interval
 from cardbox.card_model import Card
-from django.utils.timezone import utc
 from cardbox.card_views import CardUpdate
+
 
 class PracticeDeckList(DeckList):
     """Adds due cards to DeckList overview.
@@ -51,11 +53,10 @@ class PracticeCardUpdate(CardUpdate):
 
 class next_practice_item(TemplateView):
 
-
     def get(self, request, *args, **kwargs):
         """Prepares the items to learn and sorts them differently depending on mode.
 
-         If the user chooses force mode the cards will be displayed according to when he last viewed them starting
+         (Not yet implemented:) If the user chooses force mode the cards will be displayed according to when he last viewed them starting
          with the least recent. If the user uses Skip in this mode, the card will be put at the end of the deck.
 
         """
@@ -64,12 +65,25 @@ class next_practice_item(TemplateView):
         if not 'force' in kwargs:
             kwargs['force'] = False
         if kwargs['force']:
-            all_practice_for_this_deck = Practice.objects.filter(user=self.request.user, object_id__in=all_card_ids_for_deck).order_by('ended_last_viewing')
+            # Get all cards of this user, due or not.
+            all_practice_for_this_deck = \
+                Practice.objects.filter(
+                    user = self.request.user,
+                    object_id__in = all_card_ids_for_deck
+                ).order_by('ended_last_viewing')
         else:
-            all_practice_for_this_deck = Practice.objects.filter(next_practice__lte=datetime.datetime.utcnow().replace(tzinfo=utc), user=self.request.user, object_id__in=all_card_ids_for_deck).order_by('next_practice')
+            # Get all cards of this user, where timestamp is due or repetition is 0.
+            all_practice_for_this_deck = \
+                Practice.objects.filter(
+                    Q(user = self.request.user),
+                    Q(object_id__in = all_card_ids_for_deck),
+                    Q(next_practice__lte = datetime.datetime.utcnow().replace(tzinfo=utc)) | Q(times_practiced = 0)
+                ).order_by('next_practice')
         if len(all_practice_for_this_deck) is 0:
+            # There will be a comic if you are finished.
             return HttpResponseRedirect("/comic/")
         else:
+            # Otherwise you will see the next due card.
             kwargs['practice'] = all_practice_for_this_deck[0]
             return super(next_practice_item,self).get(request,*args,**kwargs)
 
@@ -96,19 +110,10 @@ def process_rating(request):
     """Processes the rating if any given and links back to the learning method of the current deck.
 
     """
-
-    practice_item = get_object_or_404(DelayablePractice,
-                                      pk=int(request.POST['id']))
+    practice_item = get_object_or_404(DelayablePractice, pk=int(request.POST['id']))
     if request.POST['force'] == 'False':
         rating = int(request.POST['rating_value'])
-        if rating < 2:
-            practice_item.delay(10)
-        elif rating == 2:
-            practice_item.delay(30)
-            practice_item.times_practiced += 1
-        else:
-            practice_item.set_next_practice(rating)
-
-    practice_item.ended_last_viewing = datetime.datetime.utcnow().replace(tzinfo=utc)
-    practice_item.save()
+        practice_item.set_next_practice(rating)
+        practice_item.ended_last_viewing = datetime.datetime.utcnow().replace(tzinfo=utc)
+        practice_item.save()
     return HttpResponseRedirect(reverse('learning:learning', args=(practice_item.item.deck_id,)))

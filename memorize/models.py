@@ -2,17 +2,10 @@
 
 """
 
-from datetime import datetime, timedelta
-
-from django.utils.timezone import utc
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-
-from .algorithm import interval
-
 
 class Practice(models.Model):
     """This model saves the learning stats of a user linked to a specific item.
@@ -46,26 +39,3 @@ class Practice(models.Model):
 
     class Meta:
         ordering = ['next_practice']
-
-    def set_next_practice(self, rating):
-        """Uses the :func:`tsune.memorize.algorithm.interval` function to calculate next practice.
-
-        Args:
-         rating (int): Rating from 0 (incorrect) to 5 (easiest) of difficulty of item:
-             5 - perfect response
-             3 - correct response after a hesitation
-             1 - correct response recalled with serious difficulty
-             0 - incorrect response
-
-        """
-        self.times_practiced += 1
-        practice_interval, ef = interval(self.times_practiced, rating, self.easy_factor)
-        self.delay(minutes=practice_interval*1440) # delay expects the interval in minutes.
-        self.easy_factor = ef
-        self.save()
-
-    def delay(self, minutes=10):
-        """Adds n minutes to next practice.
-
-        """
-        self.next_practice = datetime.utcnow().replace(tzinfo=utc) + timedelta(minutes=minutes)

@@ -18,10 +18,15 @@ def interval(repetition, rating, easy_factor=2.5):
       float: new easiness factor
 
     """
-    repetition, easy_factor = calculateEasyFactor(easy_factor, rating, repetition)
-    interval = calculateInterval(repetition, rating, easy_factor)
-
-    return interval, easy_factor
+    if rating < 3:
+        return 10, easy_factor
+    elif rating == 3:
+        return 30, easy_factor
+    else:
+        repetition, easy_factor = calculateEasyFactor(easy_factor, rating, repetition)
+        repetition_interval = calculateInterval(repetition, rating, easy_factor)
+        repetition_interval *= 1440 # delay() expects the interval in minutes, but calculateInterval() returns days.
+        return repetition_interval, easy_factor
 
 def calculateInterval(repetition, rating, easy_factor):
     """ Calculate the inter-repetition interval
@@ -47,7 +52,7 @@ def calculateInterval(repetition, rating, easy_factor):
      easy_factor (float): easiness factor
 
     Returns:
-      int: minutes until next practice
+      int: days until next practice
 
     """
     if repetition < 0:
@@ -56,12 +61,12 @@ def calculateInterval(repetition, rating, easy_factor):
     if easy_factor < 1.3:
         raise ValueError, 'Easy factor must not be less than 1.3!'
 
-    if repetition < 2:
+    if repetition < 3:
         return rating/2
-    elif repetition==2:
+    elif repetition==3:
         return rating
     else:
-        return calculateInterval(repetition-1, easy_factor)*easy_factor
+        return calculateInterval(repetition-1, rating, easy_factor)*easy_factor
 
 def calculateEasyFactor(oldEF, rating, repetition):
     """ Calculate new easy factor from old factor and rating.
