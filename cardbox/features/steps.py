@@ -70,10 +70,15 @@ def in_learning_dialog_for_deck(step, deck):
      # Check db.
     assert False, "this step must be implemented"
 
-@step(u'I click the button "[^"]*"')
-def click_button(step, button):
-    # Web driver: find message on page.
-    assert False, "this step must be implemented"
+@step(u'I click the button "([^"]*)"')
+def click_button(step, button_id):
+    button = world.browser.find_by_id(button_id)
+    assert button.click()
+
+@step(u'I click the link "([^"]*)"')
+def click_link(step, link_part):
+    assert world.browser.click_link_by_partial_href(link_part);
+
 
 @step(u'I rate this card "([^"]*)"')
 def rate_card(step, rating):
@@ -92,7 +97,7 @@ def see_dialog(step, dialog):
 
 # Steps first appearing in UC3 - Edit Card.
 
-@step(u'I create a card in the deck "([^"]*)" with the field "([^"]*)" set to "([^"]*)"')
+@step(u'I create a card in the deck "([^"]*)" with the field "(front|back)" set to "([^"]*)"')
 def create_card_with_field_set_to(step, deck_title, field_name, value):
     #TODO: Create card via the browser.
     deck = world.get_deck(deck_title)
@@ -130,6 +135,8 @@ def go_to_page(step, page):
     if page in world.page_map.keys():
         url = world.page_map[page]
         world.response = world.browser.visit(django_url(url))
+    else:
+        raise AssertionError, "Invalid page name"
 
 @step(u'I see the deck "([^"]*)" in my portfolio')
 def see_deck_in_portfolio(step, deck):
@@ -170,10 +177,13 @@ def password_is_set_to(step, username, password):
 
 @step(u'I enter "([^"]*)" and "([^"]*)"')
 def enter_username_and_password(step, username, password):
-    # Web driver: fill in data and hit enter.
     world.browser.fill("username", username)
     world.browser.fill("password", password)
-    world.browser.find_by_value('login').click()
+    world.browser.find_by_value('Anmelden')[0].click()
+
+@step(u'I enter "([^"]*)" into "([^"]*)"')
+def enter_value_into_form(step, value, form_id):
+    world.browser.fill(form_id, value)
 
 @step (u'I am on (.*)')
 def am_on_page(step, page):

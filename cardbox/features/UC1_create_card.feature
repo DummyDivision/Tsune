@@ -20,8 +20,8 @@ Feature: Create Card
     Then I see the message "Diese Karte existiert bereits"
     
   Scenario: Required field was left blank
-    When I create a card in the deck "Datenbanken" with the field "<field_name>" left blank
-    Then I see the message "<field_name> muss angegeben sein"
+    When I create a card in the deck "Datenbanken" with the field "<field_name>" set to "foo"
+    Then I see the message "Fehler!"
   
   Examples:
     | field_name |
