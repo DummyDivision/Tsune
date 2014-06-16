@@ -94,7 +94,8 @@ world.user_is_authenticated = user_is_authenticated
 # Maps the page names to the actual urls.
 world.page_map = {"the login page": "/user/login/",
                   "the main page":  "/cardbox/",
-                  "my portfolio":   "/cardbox/"}
+                  "my portfolio":   "/cardbox/",
+                  "the admin login page": "/admin/"}
 
 @before.runserver
 def setup_database(actual_server):

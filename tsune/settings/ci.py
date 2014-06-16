@@ -4,8 +4,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': '/vagrant/test-database.db',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'vagrant',
+        'PASSWORD': 'vagrant',
         'HOST': '',
         'PORT': ''
         }

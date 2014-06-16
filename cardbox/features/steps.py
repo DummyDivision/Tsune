@@ -1,5 +1,6 @@
 from lettuce.django import django_url
 from lettuce import step,world
+import time
 from cardbox.card_model import Card
 
 
@@ -180,6 +181,8 @@ def enter_username_and_password(step, username, password):
     world.browser.fill("username", username)
     world.browser.fill("password", password)
     world.browser.find_by_value('Anmelden')[0].click()
+    # time.sleep(3)
+    # world.browser.visit(django_url(world.page_map['my portfolio']))
 
 @step(u'I enter "([^"]*)" into "([^"]*)"')
 def enter_value_into_form(step, value, form_id):
@@ -190,7 +193,7 @@ def am_on_page(step, page):
     expected_url = ""
     if page in world.page_map.keys():
         expected_url = world.page_map[page]
-    assert world.browser.url == django_url(expected_url), 'The url seems to be wrong.'
+    assert world.browser.url == django_url(expected_url), 'The url'+ world.browser.url +' seems to be wrong.'
 
 @step(u'"([^"]*)" is not the name of a registered user')
 def is_not_the_name_of_registered_user(step, username):
