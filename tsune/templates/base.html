@@ -20,7 +20,7 @@
     <nav class="navbar" role="navigation">
       <ul class="nav navbar-nav navbar-default navbar-right white-backgrd">
         {% if user.is_authenticated %}
-        <li><a href="{% url 'profile:profile' user.id %}">{{  user.email }}</a></li>
+        <li><a href="{% url 'profile:profile_detail' user.id %}" >{{  user.email }}</a></li>
         {% endif %}
         <li><a href="{% url 'deck:deck_list' %}"><span class="glyphicon glyphicon-th"></span>&nbsp;Meine Decks</a></li>
         <li>

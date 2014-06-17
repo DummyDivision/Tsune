@@ -8,104 +8,194 @@
 {% block content %}
     <div class="container">
         <div class="row well">
-            <div class="panel">
+                <!-- Header with profile-picture, cover , nickname -->
+            <div class="panel panel-cover">
                <img class="pic img-circle" src="{{ object.image_url }}" alt="..." >
-               <div class="name"><small>{% inplace_edit "object.nickname" %}</small></div>
+               <div class="name"><small>{{  object.nickname }} </small></div>
                <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
             </div>
 
             <br><br><br>
 
+                <!-- Navbar -->
             <ul class="nav nav-tabs" id="myTab">
-              <li class="active"><a href="#inbox" data-toggle="tab"> Über mich</a></li>
-              <li><a href="#sent" data-toggle="tab"> Auszeichnungen</a></li>
-              <li><a href="#assignment" data-toggle="tab">meine Gruppen </a></li>
-              <li><a href="#event" data-toggle="tab"> Duelle</a></li>
+              <li class="active"><a href="#about_me" data-toggle="tab"> Über mich</a></li>
+              <li><a href="#groups" data-toggle="tab">meine Gruppen </a></li>
+              <li><a href="#award" data-toggle="tab"> Auszeichnungen </a></li>
+              <li><a href="#duel" data-toggle="tab"> Duelle</a></li>
             </ul>
 
             <br>
 
-            <div class="row">
-                    <div class="col-md-12" style="text-align: center;" > Progress-bar </div>
+            <div class="tab-content">
+                    <!-- about_me -->
+                <div class="tab-pane active" id="about_me">
+                    <div class="panel panel-primary" >
+                        <div class="panel-heading">
+                            <div class="info panel-title">Lernstatus</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row top">
+                                    <div class="col-md-4 sum" > Decks ges.</div>
+                                    <div class="col-md-4 sum" > Karten ges. </div>
+                                    <div class="col-md-4 sum" style="border: none;"> Duelle ges. </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-4 sum" > 15 </div>
+                                    <div class="col-md-4 sum" > 625 </div>
+                                    <div class="col-md-4 sum" style="border: none;" > 10 </div>
+                            </div>
+                            <div class="row" style="margin-top: 50px;">
+                                    <div class="col-md-12">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-success" style="width: 35%">
+                                            <span class="sr-only">35% Complete (success)</span>
+                                          </div>
+                                          <div class="progress-bar progress-bar-danger" style="width: 65%">
+                                            <span class="sr-only">65% Complete (danger)</span>
+                                          </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <p class="sum" style="border: none;">
+                                35% ausreichend gelernt <br>
+                                65% noch zu lernen
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                           <div class="panel panel-primary top" >
+                             <div class="panel-heading">
+                               <div class="info panel-title">Info</div>
+                             </div>
+                             <div class="panel-body top">
+                               <table>
+                                    <tr>
+                                        <th>Nickname:</th>
+                                        <td>{% inplace_edit "object.nickname" %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td>Jasmin Marquardt</td>
+                                    </tr>
+                                    <tr>
+                                        <th>E-Mail:</th>
+                                        <td>{{ object.user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Description:</th>
+                                        <td>{% inplace_edit "object.description" adaptor="markitup" %}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bild-URL:</th>
+                                        <td>{% inplace_edit "object.image_url" %}</td>
+                                    </tr>
+                               </table>
+                             </div>
+                           </div>
+
+                        </div>
+                        <div class="col-md-7">
+                            <div class="panel panel-primary top">
+                                <div class="panel-heading">
+                                    <div class="info panel-title">Neuigkeiten</div>
+                                </div>
+                                <div class="panel-body">
+                                </div>
+                                  <ul class="list-group">
+                                    <li class="list-group-item">Neuen Batch erhalten: BatchXY</li>
+                                    <li class="list-group-item">Neues geteiltes Deck in Gruppe HTML</li>
+                                    <li class="list-group-item">USER XYZ hat dich zu eiem Duell rausgefordert</li>
+                                    <li class="list-group-item">Du bist jetzt Mitglied der Gruppe HTML</li>
+                                    <li class="list-group-item">Neuen Batch erhalten: ABC</li>
+                                  </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                    <!-- groups -->
+                 <div class="tab-pane" id="groups">
+                    <h4>Gruppenmitgliedschaften</h4> <br> <hr>
+                     <div class="row">
+                        <div class="col-md-3">
+                           <img class="grouppic img-circle" src="{{ object.image_url }}" alt="..." >
+                        </div>
+                        <div class="col-md-3">
+                           <h3>{{  object.nickname }} </h3>
+                        </div>
+                        <div class="col-md-3">
+                           Mitglied seit: 15.5.2013 <br>
+                           Mitglieder : 15
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"  class="btn btn-xs btn-primary btnp"> <span class="glyphicon glyphicon-share"></span> Deck mit Gruppe teilen </a><br>
+                            <a href="#"  class="btn btn-xs btn-primary btnp"> <span class="glyphicon glyphicon-bullhorn"></span> Gruppenduell starten</a>
+                            <a href="#"  class="btn btn-xs btn-primary btnp" > <span class="glyphicon glyphicon-remove"></span> Gruppe verlassen </a> <br>
+                        </div>
+                     </div>
+                     <hr>
+                     <div class="row">
+                        <div class="col-md-3">
+                            <img class="grouppic img-circle" src="{% static "Zoidberg.png" %}" alt="..." >
+                        </div>
+                            <div class="col-md-3">
+                               <h3> HMTL </h3>
+                            </div>
+                        <div class="col-md-3">
+                            Mitglied seit: 20.5.2013 <br>
+                            Mitglieder : 200
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"  class="btn btn-xs btn-primary btnp"> <span class="glyphicon glyphicon-share"></span> Deck mit Gruppe teilen </a><br>
+                            <a href="#"  class="btn btn-xs btn-primary btnp"> <span class="glyphicon glyphicon-bullhorn"></span> Gruppenduell starten</a>
+                            <a href="#"  class="btn btn-xs btn-primary btnp" > <span class="glyphicon glyphicon-remove"></span> Gruppe verlassen </a> <br>
+                        </div>
+                     </div>
+                         <hr>
+                 </div>
+                    <!-- award -->
+                 <div class="tab-pane" id="award">
+                   Batches und Achievements
+                 </div>
+
+                    <!-- duel -->
+                 <div class="tab-pane" id="duel">
+                    Duelle
+                    <div class="row">
+                        <div class="col-md-2">
+                        <ul class="nav nav-pills nav-stacked" >
+                            <li class="active" ><a href="#all" data-toggle="tab"> Übersicht</a></li>
+                            <li><a href="#H" data-toggle="tab">Herausforderungen</a></li>
+                            <li><a href="#G" data-toggle="tab">Gruppenduelle</a></li>
+                            <li><a href="#b" data-toggle="tab">beendete Duelle</a></li>
+                        </ul>
+
+                        </div>
+                        <div class="col-md-10">
+                            <div class="tab-pane" id="all">
+                                Test 1
+                            </div>
+                            <div class="tab-pane" id="H">
+                                Test 2
+                            </div>
+                            <div class="tab-pane" id="G">
+                                Test 3
+                            </div>
+                            <div class="tab-pane" id="b">
+                                Test 4
+                            </div>
+                        </div>
+                    </div>
+                 </div>
             </div>
-            <table>
-                <tr>
-                    <td>Nickname:</td>
-                    <td>{% inplace_edit "object.nickname" %}</td>
-                </tr>
-                <tr>
-                    <td>E-Mail:</td>
-                    <td>{{ object.user.email }}</td>
-                </tr>
-                <tr>
-                    <td>Description:</td>
-                    <td>{% inplace_edit "object.description" adaptor="markitup" %}</td>
-                </tr>
-                <tr>
-                    <td>Bild-URL:</td>
-                    <td>{% inplace_edit "object.image_url" %}</td>
-                </tr>
-            </table>
+
         </div>
     </div>
-
-
-<!--
-
-<div class="container">
-	<div class="row well">
-        <div class="col-md-10">
-                <div class="panel">
-                    <img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
-                    <div class="name"><small>{% inplace_edit "object.nickname" %}</small></div>
-                    <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
-                </div>
-
-    <br><br><br>
-    <ul class="nav nav-tabs" id="myTab">
-      <li class="active"><a href="#inbox" data-toggle="tab"><i class="fa fa-envelope-o"></i> Inbox</a></li>
-      <li><a href="#sent" data-toggle="tab"><i class="fa fa-reply-all"></i> Sent</a></li>
-      <li><a href="#assignment" data-toggle="tab"><i class="fa fa-file-text-o"></i> Assignment</a></li>
-      <li><a href="#event" data-toggle="tab"><i class="fa fa-clock-o"></i> Event</a></li>
-    </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="inbox">
-        <a type="button" data-toggle="collapse" data-target="#a1">
-            <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
-              <div class="btn-group"><input type="checkbox"></div>
-              <div class="btn-group col-md-3">Admin Kumar</div>
-              <div class="btn-group col-md-8"><b>Hi Check this new Bootstrap plugin</b> <div class="pull-right"><i class="glyphicon glyphicon-time"></i> 12:10 PM <button class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-share-square-o"> Reply</i></button></div> </div>
-            </div>
-        </a>
-        <div id="a1" class="collapse out well">This is the message body1</div>
-        <br>
-        <button class="btn btn-primary btn-xs"><i class="fa fa-check-square-o"></i> Delete Checked Item's</button>
-      </div>
-
-
-      <div class="tab-pane" id="sent">
-            <a type="button" data-toggle="collapse" data-target="#s1">
-            <div class="btn-toolbar well well-sm" role="toolbar"  style="margin:0px;">
-              <div class="btn-group"><input type="checkbox"></div>
-              <div class="btn-group col-md-3">Kumar</div>
-              <div class="btn-group col-md-8"><b>This is reply from Bootstrap plugin</b> <div class="pull-right"><i class="glyphicon glyphicon-time"></i> 12:30 AM</div> </div>
-            </div>
-        </a>
-        <div id="s1" class="collapse out well">This is the message body1</div>
-        <br>
-        <button class="btn btn-primary btn-xs"><i class="fa fa-check-square-o"></i> Delete Checked Item's</button>
-      </div>
-
-
-     <div class="tab-pane" id="assignment">
-        <a href=""><div class="well well-sm" style="margin:0px;">Open GL Assignments <span class="pull-right"><i class="glyphicon glyphicon-time"></i> 12:20 AM 20 Dec 2014 </span></div></a>
-     </div>
-</div>
-</div>
-
--->
-
 
 {% endblock %}
 

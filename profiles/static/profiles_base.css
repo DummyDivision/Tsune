@@ -7,9 +7,17 @@
      margin-bottom:-60px;
 }
 
-.panel
+.grouppic
 {
-    background-image:url("http://autoimagesize.com/wp-content/uploads/2014/01/rainbow-aurora-background-wallpaper-colour-images-rainbow-background.jpg");
+     margin-top:20px;
+     width:80px;
+     margin-left:20px;
+}
+
+
+.panel-cover
+{
+   background-image:url( "banner.jpg" ); background-repeat:no-repeat; background-position: right;
 }
 
 .name
@@ -17,11 +25,6 @@
     position:absolute;
     padding-left:200px;
     font-size:30px;
-}
-
-.dropdown
-{
-    position:absolute;
 }
 
 .change
@@ -39,4 +42,46 @@
  text-decoration:none;
  background-color:black;
  color:white;
+}
+
+.btnp
+{
+    margin-bottom: 5px;
+}
+
+hr
+{
+border-width: medium;
+}
+
+.sum
+{
+    text-align: center;
+    border-right: 2px solid #7b7b7b;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+
+.info
+{
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.top
+{
+    margin-top: 15px;
+}
+
+tr
+{
+    height: 50px;
+}
+
+td
+{
+    padding-left: 10px;
 }

@@ -5,5 +5,5 @@ import views
 urlpatterns = patterns('',
                        url(r'^(?P<pk>\d+)/$',
                            login_required(views.ProfileView.as_view(
-                               template_name="profiles/profile/profile.html")), name='profile')
+                               template_name="profiles/profile/profile.html")), name='profile_detail')
 )

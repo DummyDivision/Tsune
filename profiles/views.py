@@ -6,3 +6,7 @@ from models import Profile
 
 class ProfileView(DetailView):
     model = Profile
+
+ #   def get_queryset(self):
+ #       user = User.objects.get(id=self.kwargs["pk"])
+ #       return Profile.objects.get(user=user)
