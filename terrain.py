@@ -91,6 +91,14 @@ def user_is_authenticated(username):
     return False
 world.user_is_authenticated = user_is_authenticated
 
+def check_field(field, value):
+    return field.raw == value
+world.check_field = check_field
+
+def set_field(field, value):
+    field.raw = value
+world.set_field = set_field
+
 # Maps the page names to the actual urls.
 world.page_map = {"the login page": "/user/login/",
                   "the main page":  "/cardbox/",

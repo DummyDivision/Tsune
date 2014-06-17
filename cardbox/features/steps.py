@@ -1,7 +1,8 @@
 from lettuce.django import django_url
 from lettuce import step,world
-import time
+
 from cardbox.card_model import Card
+
 
 
 # Steps first appearing in UC1 - Create Card.
@@ -27,12 +28,17 @@ def create_card_in_deck_with_front_and_back(step, deckname, cardfront, cardback)
 
 @step(u'the card "([^"]*)" exists in the deck "([^"]*)"')
 def card_exists_in_deck(step, cardfront, decktitle):
-     assert world.card_from_deck_present(cardfront, decktitle), cardfront + 'does not exist in ' + decktitle
+    world.context_card = world.get_card_from_deck(cardfront, decktitle)
+    assert world.card_from_deck_present(cardfront, decktitle), cardfront + 'does not exist in ' + decktitle
 
-@step(u'the card has the field "([^"]*)" set to ([^"]*)')
-def card_has_field_set_to(step, field, text):
-     # Check db.
-    assert False, "this step must be implemented"
+@step(u'the card has the field "(front|back)" set to "([^"]*)"')
+def card_has_field_set_to(step, field, value):
+    card = world.context_card
+    if field == 'front':
+        value_matches = world.check_field(card.front, value)
+    if field == 'back':
+        value_matches = world.check_field(card.back, value)
+    assert value_matches, "The field " + field + " ist not " + value
 
 @step(u'I see the message "([^"]*)"')
 def see_message(step, message):
@@ -112,17 +118,9 @@ def create_card_with_field_set_to(step, deck_title, field_name, value):
 def change_value_of_card_field(step, field_name, new_value):
     card = world.context_card
     if field_name == 'front':
-        card.front = new_value
+        world.set_field(card.front, new_value)
     elif field_name == 'back':
-        card.back == new_value
-    assert card.save(), "Changes could not be saved"
-
-@step(u'the card has the field "([^"]*)" set to "([^"]*)"')
-def field_set_to_value(step, field_name, value):
-    card = world.context_card
-    if field_name == 'front':
-        assert card.front == value
-    assert card.back == value
+        world.set_field(card.back, new_value)
 
 # Steps first appearing in UC4 - Create Deck.
 
@@ -153,10 +151,15 @@ def deck_doesnt_exists(step, deck):
 
 # Edit deck
 
-@step(u'I change the value of the field "([^"]*)" to "([^"]*)"')
+@step(u'I change the value of the field "(front|back)" to "([^"]*)"')
 def change_value_of_field(step, field, new_value):
-     # Check db.
-    assert False, "this step must be implemented"
+    card = world.context_card
+    if field == 'front':
+        card.front = new_value
+    elif field == 'back':
+        card.back = new_value
+    card.save()
+    world.context_card = card
 
 @step(u'the deck has the name "([^"]*)"')
 def deck_has_the_name(step, newname):
