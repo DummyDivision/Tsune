@@ -37,6 +37,6 @@ Run the following in your repository root:
 
 6. ``sudo apt-get -y install libpq-dev python-dev firefox xvfb graphviz git-core``
 
-7. ``git clone https://github.com/DummyDivision/Tsune ``
+7. ``git clone https://github.com/DummyDivision/Tsune``
 
 8. ``cd Tsune && python manage.py syncdb && python manage.py migrate && python manage.py runserver``
