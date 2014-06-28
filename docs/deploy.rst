@@ -24,4 +24,19 @@ Run the following in your repository root:
 
 ...on Ubuntu Server
 #####################
-To be added...
+
+1. ``$ sudo apt-get update``
+
+2. ``$ sudo apt-get install chef``
+
+3. Do not input anything when prompted to select a chef-server. Just press Enter.
+
+4. ``wget https://dl.dropboxusercontent.com/s/pcnysdzaie6wr58/postgres.json``
+
+5. ``chef-solo -j postgres.json -r https://dl.dropboxusercontent.com/s/fh3dxy0tbjuoulm/dependencies.tar.gz``
+
+6. ``sudo apt-get -y install libpq-dev python-dev firefox xvfb graphviz git-core``
+
+7. ``git clone https://github.com/DummyDivision/Tsune ``
+
+8. ``cd Tsune && python manage.py syncdb && python manage.py migrate && python manage.py runserver``
